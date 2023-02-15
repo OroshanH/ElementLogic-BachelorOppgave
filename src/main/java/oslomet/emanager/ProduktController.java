@@ -2,9 +2,7 @@ package oslomet.emanager;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,8 +21,8 @@ public class ProduktController {
         return rep.hentAlleProdukter();
     }
 
-    @GetMapping("/slettAlle")
-    public void slettAlle(){
-        rep.slettAlleProdukter();
+    @DeleteMapping("/slettProdukt/{id}")
+    public void slettProdukt(@PathVariable int id) {
+        rep.slettAlleProdukter(id);
     }
 }

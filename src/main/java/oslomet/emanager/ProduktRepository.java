@@ -25,9 +25,9 @@ public class ProduktRepository {
         return alleProdukter;
     }
 
-    public void slettAlleProdukter () {
-        String sql = "DELETE FROM Produkt";
-        db.update(sql);
+    public void slettAlleProdukter (int id) {
+        String sql = "DELETE FROM Produkt WHERE id = ?";
+        db.update(sql, id);
     }
 
 }
