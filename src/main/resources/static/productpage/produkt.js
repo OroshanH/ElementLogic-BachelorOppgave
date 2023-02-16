@@ -1,9 +1,10 @@
-$(function(){  // kjøres når dokumentet er ferdig lastet
+$(function(){
     hentAlle();
 });
 
 function regProdukt() {
     const produkt = {
+        produktid : parseInt($("#produktid").val()),
         navn : $("#navn").val(),
         beskrivelse : $("#beskrivelse").val()
     };
@@ -11,7 +12,8 @@ function regProdukt() {
     $.post(url, produkt, function(resultat){
         hentAlle();
     });
-    $("#navn").val(""); //tøm input-feltene
+    $("#produktid").val("");
+    $("#navn").val("");
     $("#beskrivelse").val("");
 };
 
@@ -24,10 +26,10 @@ function hentAlle() {
 function formaterData(produkter){
     var ut = "<table class='table table-striped'>" +
         "<tr>" +
-        "<th>Id</th><th>Navn</th><th>Adresse</th><th>Slett</th>" +
+        "<th>ProduktID</th><th>Navn</th><th>Adresse</th><th>Slett</th>" +
         "</tr>";
     for(let i in produkter ){
-        ut+="<tr><td>"+produkter[i].id+"</td><td>"+produkter[i].navn+"</td><td>"+produkter[i].beskrivelse+"</td><td>"+ "<button onclick='slettProdukt(" + produkter[i].id + ")' class='btn btn-danger'>Slett</button>"+ "</td></tr>"
+        ut+="<tr><td>"+produkter[i].produktid+"</td><td>"+produkter[i].navn+"</td><td>"+produkter[i].beskrivelse+"</td><td>"+ "<button onclick='slettProdukt(" + produkter[i].id + ")' class='btn btn-danger'>Slett</button>"+ "</td></tr>"
     }
     $("#produktene").html(ut);
 }

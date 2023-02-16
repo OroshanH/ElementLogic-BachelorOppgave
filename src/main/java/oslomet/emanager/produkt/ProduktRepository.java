@@ -1,4 +1,4 @@
-package oslomet.emanager;
+package oslomet.emanager.produkt;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,8 @@ public class ProduktRepository {
     private JdbcTemplate db;
 
     public void lagreProdukt(Produkt produkt) {
-        String sql = "INSERT INTO Produkt (navn,beskrivelse) VALUES(?,?)";
-        db.update(sql,produkt.getNavn(),produkt.getBeskrivelse());
+        String sql = "INSERT INTO Produkt (produktid,navn,beskrivelse) VALUES(?,?,?)";
+        db.update(sql,produkt.getProduktid(),produkt.getNavn(),produkt.getBeskrivelse());
     }
 
     public List<Produkt> hentAlleProdukter() {

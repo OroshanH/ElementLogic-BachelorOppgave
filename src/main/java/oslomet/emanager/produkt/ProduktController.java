@@ -1,4 +1,4 @@
-package oslomet.emanager;
+package oslomet.emanager.produkt;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
