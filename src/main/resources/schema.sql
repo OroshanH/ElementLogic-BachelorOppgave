@@ -6,3 +6,13 @@ CREATE TABLE produkt
     beskrivelse VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 );
+
+CREATE TABLE inbound
+(
+    id INTEGER AUTO_INCREMENT NOT NULL,
+    quantity INTEGER NOT NULL,
+    produktid INTEGER NOT NULL,
+    purchaseorderid INTEGER AUTO_INCREMENT NOT NULL,
+    purchaseorderlineid INTEGER AUTO_INCREMENT NOT NULL,
+    PRIMARY KEY (id)
+);
