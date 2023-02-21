@@ -1,0 +1,21 @@
+package oslomet.emanager.inbound;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+public class InboundController {
+
+    @Autowired
+    InboundRepository rep;
+
+    @PostMapping
+    public void lagreInbound(Inbound innInbound){rep.lagreInbound(innInbound);}
+
+    @GetMapping("/hentAlleInbound")
+    public List<Inbound> hentAlleInbound(){return rep.hentAlleInbound();}
+}

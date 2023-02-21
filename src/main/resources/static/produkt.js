@@ -19,8 +19,7 @@ function regProdukt() {
 
 function hentAlle() {
     $.get( "/hentAlle", function( data ) {
-        formaterData(data);
-    });
+        formaterData(data);});
 };
 
 function formaterData(produkter){
