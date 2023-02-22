@@ -13,9 +13,12 @@ public class InboundRepository {
     @Autowired
     private JdbcTemplate db;
 
-    public void lagreInbound(Inbound inbound){
-        String sql = "INSERT INTO Inbound (quantity,produktid) VALUES(?,?)";
-        db.update(sql,inbound.getQuantity(),inbound.getProduktid());
+    public void lagreInbound(Inbound inbound) {
+        String sql = "MERGE INTO Inbound i USING (VALUES(?, ?)) AS vals(quantity, produktid) " +
+                "ON i.produktid = vals.produktid " +
+                "WHEN MATCHED THEN UPDATE SET i.quantity = i.quantity + vals.quantity " +
+                "WHEN NOT MATCHED THEN INSERT (quantity, produktid) VALUES (vals.quantity, vals.produktid)";
+        db.update(sql, inbound.getQuantity(), inbound.getProduktid());
     }
 
     public List<Inbound> hentAlleInbound(){

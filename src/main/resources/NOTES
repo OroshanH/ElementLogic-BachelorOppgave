@@ -21,3 +21,5 @@ SKAL KUNNE SE PRODUKT ID, NAVN, BESKRIVELSE OG QUANTITY
 Inbound page:
 Når det sendes antall av et produkt, også sendes et nytt antall av det samme produktet så opprettes det en ny linje i database tabellen. -
 Fikse sånn at istedenfor ny linje så adderes antallet som kommer inn oppå det antallet som allerede ligger der?
+Siden det opprettes nye columns istedenfor at antallet legges sammen, så blir det flere columns i inbound enn i product og da klarer ikke stock js hente ut
+navn og beskrivesle
