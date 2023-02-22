@@ -15,3 +15,9 @@ STOCK PAGE :
 
 SKAL LISTE ALLE PRODUKTER SOM HAR BLITT SENDT FRA INBOUND TIL EMANAGER
 SKAL KUNNE SE PRODUKT ID, NAVN, BESKRIVELSE OG QUANTITY
+
+
+
+Inbound page:
+Når det sendes antall av et produkt, også sendes et nytt antall av det samme produktet så opprettes det en ny linje i database tabellen. -
+Fikse sånn at istedenfor ny linje så adderes antallet som kommer inn oppå det antallet som allerede ligger der?
