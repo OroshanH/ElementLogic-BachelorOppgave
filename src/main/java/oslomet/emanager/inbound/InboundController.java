@@ -13,7 +13,7 @@ public class InboundController {
     @Autowired
     InboundRepository rep;
 
-    @PostMapping
+    @PostMapping("/lagreInbound")
     public void lagreInbound(Inbound innInbound){rep.lagreInbound(innInbound);}
 
     @GetMapping("/hentAlleInbound")
