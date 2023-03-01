@@ -11,3 +11,29 @@
   text-decoration: none;
   font-size: 17px;
 }
+.table-height {
+  height: 500px;
+}
+
+.main-content{
+  display: flex;
+  background-color: midnightblue;
+  height: 800px;
+}
+
+.left-side-registration-box{
+  display: flex;
+  flex-direction: column;
+  background-color: gray;
+  margin: 30px;
+  height: 40%; /* For å justere høyden til registrerings boksen */
+  width: 25%;
+}
+.right-side-table {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin: 30px;
+  height: 80%; /* For å justere høyden til tabell div'en*/
+  width: 75%;
+}
