@@ -17,17 +17,19 @@
 
 .main-content{
   display: flex;
-  background-color: midnightblue;
+  background-color: #34495E;
   height: 800px;
 }
 
 .left-side-registration-box{
   display: flex;
   flex-direction: column;
-  background-color: gray;
+  background-color: #97999B;
   margin: 30px;
   height: 40%; /* For å justere høyden til registrerings boksen */
-  width: 25%;
+  width: 20%;
+  border-radius: 10px 10px 10px 10px;
+
 }
 .right-side-table {
   display: flex;
@@ -36,4 +38,51 @@
   margin: 30px;
   height: 80%; /* For å justere høyden til tabell div'en*/
   width: 75%;
+
 }
+
+
+.form {
+  max-width: 500px;
+  margin: 10px auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+input,
+textarea {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 20px;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #666;
+}
+
+@media (max-width: 767px) {
+  .form-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+
+
+
+
+
+
+
