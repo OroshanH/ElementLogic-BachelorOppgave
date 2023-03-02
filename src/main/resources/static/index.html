@@ -13,29 +13,37 @@
 
 </head>
 <body>
+
 <div class="topnav">
-    <a href="index.html">Product Page</a>
+    <a href="index.html" class="active">Product Page</a>
     <a href="inboundpage/inbound.html">Inbound Page</a>
     <a href="stockpage/stock.html">Stock Page</a>
     <a href="orderpage/order.html">Order Page</a>
+    <div class="logo"><a href="#"><img src="logo.jpg"></a>
+</div>
 </div>
 
 <div class="main-content">
         <div class="left-side-registration-box">
 
-            <div class="settings">
+            <form class="form">
 
+                <div class="form-group">
                     <label>ProduktID:</label>
                     <input type="number" id="produktid"/>
+                </div>
 
+                <div class="form-group">
                     <label>Navn:</label>
                     <input type="text" id="navn"/>
+                </div>
 
+                <div class="form-group">
                     <label>Beskrivelse:</label>
                     <input type="text" id="beskrivelse"/>
-
-            </div>
-            <button class="btn btn-light button-width" onclick="regProdukt()" >Registrer</button><br/>
+                </div>
+            </form>
+            <button class="btn btn-primary" onclick="regProdukt()" >Registrer</button><br/>
 
         </div>
 
