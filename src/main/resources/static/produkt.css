@@ -34,7 +34,7 @@ body {
 .left-side-registration-box{
   display: flex;
   flex-direction: column;
-  background-color: #16A085;
+  background-color: #E67E22;
   margin: 30px;
   height: 70%; /* For å justere høyden til registrerings boksen */
   width: 25%;
@@ -50,6 +50,10 @@ body {
   width: 75%;
   border-radius: 5px 5px 5px 5px;
 }
+.center-table {
+  margin: auto;
+  width: 95% !important;
+}
 
 
 div.settings {
@@ -60,7 +64,7 @@ div.settings {
   grid-gap:5px;
 }
 div.settings label {
-  text-align:right;
+  text-align: right;
   margin-top: 5px;
   color: white;
 }

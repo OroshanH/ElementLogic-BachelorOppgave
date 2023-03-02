@@ -23,7 +23,7 @@ function hentAlle() {
 };
 
 function formaterData(produkter){
-    var ut = "<table class='table table-hover font'>" +
+    var ut = "<table class='table table-light table-hover font center-table'>" +
         "<tr>" +
         "<th scope='col'>ProduktID</th><th scope='col'>Navn</th><th scope='col'>Beskrivelse</th><th scope='col'>Slett</th>" +
         "</tr>";
