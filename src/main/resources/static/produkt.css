@@ -17,6 +17,13 @@ body {
 .table-height {
   height: 500px;
 }
+.table-title {
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
+.font {
+  font-family: 'Roboto', sans-serif;
+}
 
 .main-content{
   display: flex;

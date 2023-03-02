@@ -23,12 +23,12 @@ function hentAlle() {
 };
 
 function formaterData(produkter){
-    var ut = "<table class='table table-striped'>" +
+    var ut = "<table class='table table-hover font'>" +
         "<tr>" +
-        "<th>ProduktID</th><th>Navn</th><th>Beskrivelse</th><th>Slett</th>" +
+        "<th scope='col'>ProduktID</th><th scope='col'>Navn</th><th scope='col'>Beskrivelse</th><th scope='col'>Slett</th>" +
         "</tr>";
     for(let i in produkter ){
-        ut+="<tr><td>"+produkter[i].produktid+"</td><td>"+produkter[i].navn+"</td><td>"+produkter[i].beskrivelse+"</td><td>"+ "<button onclick='slettProdukt(" + produkter[i].id + ")' class='btn btn-danger'>Slett</button>"+ "</td></tr>"
+        ut+="<tr><th scope='row'>"+produkter[i].produktid+"</th><td>"+produkter[i].navn+"</td><td>"+produkter[i].beskrivelse+"</td><td>"+ "<button onclick='slettProdukt(" + produkter[i].id + ")' class='btn btn-danger'>Slett</button>"+ "</td></tr>"
     }
     $("#produktene").html(ut);
 }
