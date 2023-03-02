@@ -1,9 +1,9 @@
 body {
-  background-color: midnightblue;
+  background-color: #34495E;
 }
 
 .topnav {
-   background-color: black;
+  background-color: black;
   overflow: hidden;
 }
 .topnav a {
@@ -28,17 +28,17 @@ body {
 .main-content{
   display: flex;
   background-color: #34495E;
-  height: 800px;
+  height: 100%;
 }
 
 .left-side-registration-box{
   display: flex;
   flex-direction: column;
-  background-color: #97999B;
+  background-color: #16A085;
   margin: 30px;
-  height: 40%; /* For å justere høyden til registrerings boksen */
-  width: 20%;
-  border-radius: 10px 10px 10px 10px;
+  height: 70%; /* For å justere høyden til registrerings boksen */
+  width: 25%;
+  border-radius: 5px 5px 5px 5px;
 
 }
 .right-side-table {
@@ -46,36 +46,46 @@ body {
   flex-direction: column;
   background-color: white;
   margin: 30px;
-  height: 80%; /* For å justere høyden til tabell div'en*/
+  height: 75%; /* For å justere høyden til tabell div'en */
   width: 75%;
-
+  border-radius: 5px 5px 5px 5px;
 }
 
 
-.form {
-  max-width: 500px;
-  margin: 10px auto;
+div.settings {
+  display:grid;
+  margin-top: 20px;
+  margin-left: 20px;
+  grid-template-columns: max-content max-content;
+  grid-gap:5px;
+}
+div.settings label {
+  text-align:right;
+  margin-top: 5px;
+  color: white;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
+.button-width {
+  width: 25%;
+  text-align: left;
+  margin-left: 100px;
 }
-
+/* Trengs ikke kanskje?
 label {
   font-weight: bold;
   margin-bottom: 10px;
-}
-
-input,
+  margin-right: 5px;
+  text-align: right;
+} */
+/* Brukes ikke?
 textarea {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 20px;
-}
+} */
 
+/*
 input:focus,
 textarea:focus {
   outline: none;
@@ -87,7 +97,7 @@ textarea:focus {
     flex-direction: column;
     align-items: flex-start;
   }
-}
+} */
 
 
 
