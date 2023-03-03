@@ -13,7 +13,7 @@ body {
   padding: 30px 30px;
   text-decoration: none;
   font-size: 21px;
-  font-family: "Roboto Light";
+  font-family: 'Roboto', sans-serif;
 }
 
 .logo img{
@@ -45,7 +45,7 @@ body {
 .left-side-registration-box{
   display: flex;
   flex-direction: column;
-  background-color: #E67E22; /*  #97999b */
+  background-color: #97999b; /*  #97999b */
   margin: 30px;
   height: 70%; /* For å justere høyden til registrerings boksen */
   width: 25%;
@@ -79,7 +79,7 @@ div.settings {
 div.settings label {
   text-align: right;
   margin-top: 5px;
-  color: white; /* black */
+  color: black; /* black */
 }
 
 .button-width {
