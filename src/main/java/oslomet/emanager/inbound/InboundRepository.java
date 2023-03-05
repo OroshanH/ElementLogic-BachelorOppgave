@@ -13,6 +13,7 @@ public class InboundRepository {
     @Autowired
     private JdbcTemplate db;
 
+
     public void lagreInbound(Inbound inbound) {
         String sql = "MERGE INTO Inbound i USING (VALUES(?, ?)) AS vals(quantity, produktid) " +
                 "ON i.produktid = vals.produktid " +

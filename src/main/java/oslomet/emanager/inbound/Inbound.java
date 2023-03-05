@@ -1,6 +1,14 @@
 package oslomet.emanager.inbound;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Inbound {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private int quantity;
@@ -8,7 +16,6 @@ public class Inbound {
     private int produktid;
 
     private int purchaseorderid;
-
     private int purchaseorderlineid;
 
     public Inbound(){
