@@ -12,7 +12,7 @@ CREATE TABLE inbound
     id INTEGER AUTO_INCREMENT NOT NULL,
     quantity INTEGER NOT NULL,
     produktid INTEGER NOT NULL,
-    purchaseorderid INTEGER AUTO_INCREMENT NOT NULL,
-    purchaseorderlineid INTEGER AUTO_INCREMENT NOT NULL,
+    purchaseorderid INTEGER NOT NULL,
+    purchaseorderlineid INTEGER NOT NULL,
     PRIMARY KEY (id)
 );

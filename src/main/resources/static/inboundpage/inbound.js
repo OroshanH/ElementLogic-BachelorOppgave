@@ -22,7 +22,9 @@ function formaterData(produkter){
 function sendProdukt(id , i) {
     const inbound = {
         quantity : parseInt($("#quantity" + i).val()),
-        produktid : id
+        produktid : id,
+        purchaseorderid: i,
+        purchaseorderlineid: i
     };
     const url = "/lagreInbound";
     $.post(url, inbound, function(resultat){

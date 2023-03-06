@@ -7,7 +7,7 @@ function regProdukt() {
         produktid : parseInt($("#produktid").val()),
         navn : $("#navn").val(),
         beskrivelse : $("#beskrivelse").val()
-    };
+    }
     const url = "/lagre";
     $.post(url, produkt, function(resultat){
         hentAlle();
