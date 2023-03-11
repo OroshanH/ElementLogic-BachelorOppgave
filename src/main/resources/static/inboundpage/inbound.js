@@ -29,6 +29,9 @@ function sendProdukt(id , i) {
     const url = "/lagreInbound";
     $.post(url, inbound, function(resultat){
         alert("Sendt til eManager");
+
          $("#quantity" + i).val("");
     });
 };
+
+

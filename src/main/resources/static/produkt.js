@@ -3,18 +3,52 @@ $(function(){
 });
 
 function regProdukt() {
-    const produkt = {
-        produktid : parseInt($("#produktid").val()),
-        navn : $("#navn").val(),
-        beskrivelse : $("#beskrivelse").val()
-    }
-    const url = "/lagre";
-    $.post(url, produkt, function(resultat){
-        hentAlle();
+
+  const produkt = {
+    produktid: parseInt($("#produktid").val()),
+    navn: $("#navn").val(),
+    beskrivelse: $("#beskrivelse").val()
+  };
+
+  const url = "/lagre";
+  $.post(url, produkt, function(resultat) {
+    hentAlle();
+
+    const xmlUrl = "https://webhook.site/6e5425a6-f29d-495e-9fed-4d4fce5a6557";
+
+    $.get("/hentAlle", function(alleProdukter) {
+      const latestProdukt = alleProdukter[alleProdukter.length - 1];
+      const xmlData = `<?xml version="1.0" encoding="UTF-8"?>
+        <ImportOperation>
+          <Lines>
+            <ProductLine>
+              <TransactionId>${latestProdukt.id}</TransactionId>
+              <ExtProductId>${produkt.produktid}</ExtProductId>
+              <ProductName>${produkt.navn}</ProductName>
+              <ProductDesc>${produkt.beskrivelse}</ProductDesc>
+            </ProductLine>
+          </Lines>
+        </ImportOperation>`;
+
+      $.ajax({
+        type: "POST",
+        url: xmlUrl,
+        data: xmlData,
+        contentType: "application/xml; charset=utf-8",
+        dataType: "xml",
+        success: function(xmlResultat) {
+          alert("XML POST request completed");
+        },
+        error: function(xhr, textStatus, errorThrown) {
+          alert("XML POST request failed");
+        }
+      });
     });
-    $("#produktid").val("");
-    $("#navn").val("");
-    $("#beskrivelse").val("");
+  });
+
+  $("#produktid").val("");
+  $("#navn").val("");
+  $("#beskrivelse").val("");
 };
 
 function hentAlle() {
@@ -46,5 +80,3 @@ function slettProdukt(id) {
         }
     });
 }
-
-
