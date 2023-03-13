@@ -7,10 +7,11 @@ body {
   overflow: hidden;
 }
 .topnav a {
-  float: left;
+  float: right;
   color: black;
   text-align: center;
   padding: 30px 30px;
+  margin-right: 30px;
   text-decoration: none;
   font-size: 21px;
   font-family: 'Roboto', sans-serif;
@@ -18,7 +19,7 @@ body {
 
 .logo img{
   position: absolute;
-  right: 0px;
+  left: -2px;
   width: 240px;
   height: 80px;
   margin-top: -30px;
