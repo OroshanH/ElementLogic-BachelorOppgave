@@ -10,7 +10,6 @@ public class Produkt {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private int produktid;
     private String navn;
     private String beskrivelse;

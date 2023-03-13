@@ -18,6 +18,15 @@ CREATE TABLE inbound
 );
 
 
+CREATE TABLE stock
+(
+    id INTEGER AUTO_INCREMENT NOT NULL,
+    quantity INTEGER NOT NULL,
+    produktid INTEGER NOT NULL,
+    PRIMARY KEY (id)
+);
+
+
 CREATE TABLE outbound
 (
     id INTEGER AUTO_INCREMENT NOT NULL,
@@ -27,13 +36,5 @@ CREATE TABLE outbound
     extorderid VARCHAR(255) NOT NULL,
     extoderlineid INTEGER NOT NULL,
     status INTEGER NOT NULL,
-    PRIMARY KEY (id)
-);
-
-CREATE TABLE stock
-(
-    id INTEGER AUTO_INCREMENT NOT NULL,
-    quantity INTEGER NOT NULL,
-    produktid INTEGER NOT NULL,
     PRIMARY KEY (id)
 );

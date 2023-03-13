@@ -3,21 +3,21 @@ $(function(){
 });
 
 function hentAlleInbound() {
-  $.get( "/hentAlleInbound", function( inboundData ) {
+  $.get( "/hentStock", function( stockData ) {
     $.get( "/hentAlle", function( produkterData ) {
-      formaterData(inboundData, produkterData);
+      formaterData(stockData, produkterData);
     });
   });
 }
 
 
-function formaterData(inboundData , produkterData){
+function formaterData(stockData , produkterData){
     var ut = "<table class='table table-striped'>" +
         "<tr>" +
         "<th>ProduktID</th><th>Navn</th><th>Beskrivelse</th><th>Antall</th>" +
         "</tr>";
-    for(let i in inboundData ){
-        ut+="<tr><td>"+ inboundData[i].produktid + "</td><td>"+ produkterData[i].navn +"</td><td>"+ produkterData[i].beskrivelse +"</td><td>" + inboundData[i].quantity + "</td> </tr>"
+    for(let i in stockData ){
+        ut+="<tr><td>"+ stockData[i].produktid + "</td><td>"+ produkterData[i].navn +"</td><td>"+ produkterData[i].beskrivelse +"</td><td>" + stockData[i].quantity + "</td> </tr>"
     }
     $("#produktene").html(ut);
 }

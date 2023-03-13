@@ -37,10 +37,10 @@ function regProdukt() {
         contentType: "application/xml; charset=utf-8",
         dataType: "xml",
         success: function(xmlResultat) {
-          alert("XML POST request completed");
+          alert("Sendt til eManager");
         },
         error: function(xhr, textStatus, errorThrown) {
-          alert("XML POST request failed");
+          alert("Sending feilet");
         }
       });
     });

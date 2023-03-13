@@ -26,11 +26,18 @@ function sendProdukt(id , i) {
         purchaseorderid: i,
         purchaseorderlineid: i
     };
+    const stock = {
+        quantity : parseInt($("#quantity" + i).val()),
+        produktid : id
+    }
     const url = "/lagreInbound";
+    const stockurl = "/lagreStock";
     $.post(url, inbound, function(resultat){
         alert("Sendt til eManager");
-
          $("#quantity" + i).val("");
+    });
+    $.post(stockurl,stock,function(resultat2){
+        alert("YES");
     });
 };
 
