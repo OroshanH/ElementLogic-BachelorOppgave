@@ -24,20 +24,57 @@ function sendProdukt(id , i) {
         quantity : parseInt($("#quantity" + i).val()),
         produktid : id,
         purchaseorderid: i,
-        purchaseorderlineid: i
+        purchaseorderlineid: i,
+        status: 0
     };
     const stock = {
         quantity : parseInt($("#quantity" + i).val()),
         produktid : id
     }
     const url = "/lagreInbound";
-    const stockurl = "/lagreStock";
+    const stockUrl = "/lagreStock";
+    const emanagerUrl = "https://webhook.site/8d5fef78-9d35-4f53-b2f8-fccd3072f552";
+
     $.post(url, inbound, function(resultat){
-        alert("Sendt til eManager");
+        alert("Sendt");
          $("#quantity" + i).val("");
-    });
-    $.post(stockurl,stock,function(resultat2){
-        alert("YES");
+
+        $.post(stockUrl,stock,function(resultat2){
+            alert("YES");
+        });
+
+
+
+        $.get("/hentAlleInbound", function(alleInbound) {
+            const latestInbound = alleInbound[alleInbound.length - 1];
+            const xmlData = `<?xml version="1.0" encoding="UTF-8"?>
+        <ImportOperation>
+          <Lines>
+            <GoodsReceivalLine>
+              <TransactionId>${latestInbound.id}</TransactionId>
+              <PurchaseOrderId>${inbound.purchaseorderid}</PurchaseOrderId>
+              <PurchaseOrderLineId>${inbound.purchaseorderlineid}</PurchaseOrderLineId>
+              <ExtProductId>${inbound.produktid}</ExtProductId>
+              <Quantity>${inbound.quantity}</Quantity>
+            </GoodsReceivalLine>
+          </Lines>
+        </ImportOperation>`;
+
+            $.ajax({
+                type: "POST",
+                url: emanagerUrl,
+                data: xmlData,
+                contentType: "application/xml; charset=utf-8",
+                dataType: "xml",
+                success: function(xmlResultat) {
+                    alert("Sendt til eManager");
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    alert("Sending feilet");
+                }
+            });
+        });
+
     });
 };
 

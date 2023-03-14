@@ -17,17 +17,19 @@ public class Inbound {
 
     private int purchaseorderid;
     private int purchaseorderlineid;
+    private int status;
 
     public Inbound(){
 
     }
 
-    public Inbound(int id, int quantity, int produktid, int purchaseorderid, int purchaseorderlineid){
+    public Inbound(int id, int quantity, int produktid, int purchaseorderid, int purchaseorderlineid, int status){
         this.id = id;
         this.quantity = quantity;
         this.produktid = produktid;
         this.purchaseorderid = purchaseorderid;
         this.purchaseorderlineid = purchaseorderlineid;
+        this.status = status;
     }
 
     public int getId(){return id;}
@@ -44,5 +46,8 @@ public class Inbound {
 
     public int getPurchaseorderlineid(){return purchaseorderlineid;}
     public void setPurchaseorderlineid(int purchaseorderlineid){this.purchaseorderlineid = purchaseorderlineid;}
+
+    public int getStatus(){return status;}
+    public void setStatus(int status){this.status = status;}
 
 }

@@ -14,7 +14,7 @@ function regProdukt() {
   $.post(url, produkt, function(resultat) {
     hentAlle();
 
-    const xmlUrl = "https://webhook.site/6e5425a6-f29d-495e-9fed-4d4fce5a6557";
+    const xmlUrl = "https://webhook.site/8d5fef78-9d35-4f53-b2f8-fccd3072f552";
 
     $.get("/hentAlle", function(alleProdukter) {
       const latestProdukt = alleProdukter[alleProdukter.length - 1];

@@ -14,6 +14,7 @@ CREATE TABLE inbound
     produktid INTEGER NOT NULL,
     purchaseorderid INTEGER NOT NULL,
     purchaseorderlineid INTEGER NOT NULL,
+    status INTEGER NOT NULL,
     PRIMARY KEY (id)
 );
 
