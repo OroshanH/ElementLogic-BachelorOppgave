@@ -12,9 +12,9 @@ function hentAlleInbound() {
 
 
 function formaterData(stockData , produkterData){
-    var ut = "<table class='table table-striped'>" +
+    var ut = "<table class='table table-light table-hover font center-table'>" +
         "<tr>" +
-        "<th>ProduktID</th><th>Navn</th><th>Beskrivelse</th><th>Antall</th>" +
+        "<th scope='col'>ProduktID</th><th scope='col'>Navn</th><th scope='col'>Beskrivelse</th><th scope='col'>Antall</th>" +
         "</tr>";
     for(let i in stockData ){
         ut+="<tr><td>"+ stockData[i].produktid + "</td><td>"+ produkterData[i].navn +"</td><td>"+ produkterData[i].beskrivelse +"</td><td>" + stockData[i].quantity + "</td> </tr>"

@@ -9,12 +9,12 @@ function hentAlle() {
 };
 
 function formaterData(produkter){
-    var ut = "<table class='table table-striped'>" +
+    var ut = "<table class='table table-light table-hover font center-table'>" +
         "<tr>" +
-        "<th>ProduktID</th><th>Navn</th><th>Beskrivelse</th><th>Antall</th><th>Send</th>" +
+        "<th scope='col'>ProduktID</th><th scope='col'>Navn</th><th scope='col'>Beskrivelse</th><th scope='col'>Antall</th><th scope='col'>Send</th>" +
         "</tr>";
     for(let i in produkter ){
-        ut+="<tr><td>"+produkter[i].produktid+"</td><td>"+produkter[i].navn+"</td><td>"+produkter[i].beskrivelse+"</td><td>" +  "<input type='number' id='quantity" + i + "'>" + "</td>" + "<td>" + "<button onclick='sendProdukt(" + produkter[i].produktid + ", " + i + ")' class='btn btn-primary'>Send</button>" + "</td> </tr>"
+        ut+="<tr><td>"+produkter[i].produktid+"</td><td>"+produkter[i].navn+"</td><td>"+produkter[i].beskrivelse+"</td><td>" +  "<input type='number' id='quantity" + i + "'>" + "</td>" + "<td>" + "<button id='myButton' onclick='sendProdukt(" + produkter[i].produktid + ", " + i + ")' class='btn btn-primary'>Send</button>" + "</td> </tr>"
     }
     $("#produktene").html(ut);
 }
@@ -76,6 +76,11 @@ function sendProdukt(id , i) {
         });
 
     });
-};
+
+    /*
+    const button = document.getElementById("myButton");
+    button.classList.remove("btn-primary");
+    button.classList.add("btn-success"); */
+}
 
 
