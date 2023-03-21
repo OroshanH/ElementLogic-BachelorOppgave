@@ -14,42 +14,41 @@ function regProdukt() {
   $.post(url, produkt, function(resultat) {
     hentAlle();
 
-    const xmlUrl = "https://webhook.site/8d5fef78-9d35-4f53-b2f8-fccd3072f552";
+       $.get("/hentAlle", function(alleProdukter) {
+           const latestProdukt = alleProdukter[alleProdukter.length - 1];
+           const payload = `<ImportOperation>
+               <Lines>
+                   <ProductLine>
+                       <TransactionId>${latestProdukt.id}</TransactionId>
+                       <ExtProductId>${produkt.produktid}</ExtProductId>
+                       <ProductName>${produkt.navn}</ProductName>
+                       <ProductDesc>${produkt.beskrivelse}</ProductDesc>
+                   </ProductLine>
+               </Lines>
+           </ImportOperation>`;
 
-    $.get("/hentAlle", function(alleProdukter) {
-      const latestProdukt = alleProdukter[alleProdukter.length - 1];
-      const xmlData = `<?xml version="1.0" encoding="UTF-8"?>
-        <ImportOperation>
-          <Lines>
-            <ProductLine>
-              <TransactionId>${latestProdukt.id}</TransactionId>
-              <ExtProductId>${produkt.produktid}</ExtProductId>
-              <ProductName>${produkt.navn}</ProductName>
-              <ProductDesc>${produkt.beskrivelse}</ProductDesc>
-            </ProductLine>
-          </Lines>
-        </ImportOperation>`;
-
-      $.ajax({
-        type: "POST",
-        url: xmlUrl,
-        data: xmlData,
-        contentType: "application/xml; charset=utf-8",
-        dataType: "xml",
-        success: function(xmlResultat) {
-          alert("Sendt til eManager");
-        },
-        error: function(xhr, textStatus, errorThrown) {
-          alert("Sending feilet");
-        }
-      });
-    });
-  });
+           fetch('/produktPost', {
+               method: 'POST',
+               headers: {
+                   'Content-Type': 'application/xml'
+               },
+               body: payload
+           })
+           .then(response => {
+               console.log('Function called successfully.');
+           })
+           .catch(error => {
+               console.error('Error calling function:', error);
+           });
+       });
+       });
 
   $("#produktid").val("");
   $("#navn").val("");
   $("#beskrivelse").val("");
 };
+
+
 
 function hentAlle() {
     $.get( "/hentAlle", function( data ) {

@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
+import org.springframework.data.repository.CrudRepository;
+import java.io.IOException;
 import java.util.List;
+
 
 @Repository
 public class ProduktRepository {
@@ -29,5 +31,7 @@ public class ProduktRepository {
         String sql = "DELETE FROM Produkt WHERE id = ?";
         db.update(sql, id);
     }
+
+
 
 }

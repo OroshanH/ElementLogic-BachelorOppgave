@@ -33,7 +33,7 @@ function sendProdukt(id , i) {
     }
     const url = "/lagreInbound";
     const stockUrl = "/lagreStock";
-    const emanagerUrl = "https://webhook.site/8d5fef78-9d35-4f53-b2f8-fccd3072f552";
+    const emanagerUrl = "193.69.50.119/api/goodsreceivals/import";
 
     $.post(url, inbound, function(resultat){
         alert("Sendt");
@@ -45,35 +45,35 @@ function sendProdukt(id , i) {
 
 
 
-        $.get("/hentAlleInbound", function(alleInbound) {
-            const latestInbound = alleInbound[alleInbound.length - 1];
-            const xmlData = `<?xml version="1.0" encoding="UTF-8"?>
-        <ImportOperation>
-          <Lines>
-            <GoodsReceivalLine>
-              <TransactionId>${latestInbound.id}</TransactionId>
-              <PurchaseOrderId>${inbound.purchaseorderid}</PurchaseOrderId>
-              <PurchaseOrderLineId>${inbound.purchaseorderlineid}</PurchaseOrderLineId>
-              <ExtProductId>${inbound.produktid}</ExtProductId>
-              <Quantity>${inbound.quantity}</Quantity>
-            </GoodsReceivalLine>
-          </Lines>
-        </ImportOperation>`;
+            $.get("/hentAlleInbound", function(alleInbound) {
+                       const latestInbound = alleInbound[alleInbound.length - 1];
+                       const payload = `<?xml version="1.0" encoding="UTF-8"?>
+                   <ImportOperation>
+                     <Lines>
+                       <GoodsReceivalLine>
+                         <TransactionId>${latestInbound.id}</TransactionId>
+                         <PurchaseOrderId>${inbound.purchaseorderid}</PurchaseOrderId>
+                         <PurchaseOrderLineId>${inbound.purchaseorderlineid}</PurchaseOrderLineId>
+                         <ExtProductId>${inbound.produktid}</ExtProductId>
+                         <Quantity>${inbound.quantity}</Quantity>
+                       </GoodsReceivalLine>
+                     </Lines>
+                   </ImportOperation>`;
 
-            $.ajax({
-                type: "POST",
-                url: emanagerUrl,
-                data: xmlData,
-                contentType: "application/xml; charset=utf-8",
-                dataType: "xml",
-                success: function(xmlResultat) {
-                    alert("Sendt til eManager");
-                },
-                error: function(xhr, textStatus, errorThrown) {
-                    alert("Sending feilet");
-                }
-            });
-        });
+                   fetch('/inboundPost', {
+                       method: 'POST',
+                       headers: {
+                           'Content-Type': 'application/xml'
+                       },
+                       body: payload
+                   })
+                   .then(response => {
+                       console.log('Function called successfully.');
+                   })
+                   .catch(error => {
+                       console.error('Error calling function:', error);
+                   });
+               });
 
     });
 
