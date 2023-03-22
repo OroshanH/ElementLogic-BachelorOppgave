@@ -12,7 +12,8 @@ public class OutbondRepository {
     private JdbcTemplate db;
 
 
-    public void sendOutbond(Outbond outbond){
-
+    public void lagreOutbond(Outbond outbond){
+        String sql = "INSERT INTO Outbond (quantity,produktid,extpicklistid,extorderid,extorderlineid,status) VALUES(?,?,?,?,?,?)";
+        db.update(sql,outbond.getQuantity(),outbond.getProduktid(),outbond.getExtpicklistid(),outbond.getExtorderid(),outbond.getExtorderlineid(),outbond.getStatus());
     }
 }

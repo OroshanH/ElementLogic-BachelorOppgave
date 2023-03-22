@@ -33,7 +33,6 @@ function sendProdukt(id , i) {
     }
     const url = "/lagreInbound";
     const stockUrl = "/lagreStock";
-    const emanagerUrl = "193.69.50.119/api/goodsreceivals/import";
 
     $.post(url, inbound, function(resultat){
         alert("Sendt");

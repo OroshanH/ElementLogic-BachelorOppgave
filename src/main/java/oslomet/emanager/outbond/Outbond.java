@@ -43,10 +43,10 @@ public class Outbond {
     public void setExtpicklistid(String extpicklistid){this.extpicklistid = extpicklistid;}
 
 
-    public String getExtoderid(){return extorderid;}
+    public String getExtorderid(){return extorderid;}
     public void setExtorderid(String extorderid){this.extorderid = extorderid;}
 
-    public String getExtoderlineid(){return extorderlineid;}
+    public String getExtorderlineid(){return extorderlineid;}
     public void setExtorderlineid(String extorderlineid){this.extorderlineid = extorderlineid;}
 
     public String getStatus(){return status;}

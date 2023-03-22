@@ -10,7 +10,6 @@ public class OutbondController {
     @Autowired
     OutbondRepository rep;
 
-    @PostMapping("/sendOutbond")
-    public void sendOrder(Outbond innOutbond){rep.sendOutbond(innOutbond);}
-
+    @PostMapping("/lagreOutbond")
+    public void lagreOutbond(Outbond innOutbond){rep.lagreOutbond(innOutbond);}
 }

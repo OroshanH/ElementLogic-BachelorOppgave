@@ -35,7 +35,7 @@ CREATE TABLE outbond
     produktid INTEGER NOT NULL,
     extpicklistid VARCHAR(255) NOT NULL,
     extorderid VARCHAR(255) NOT NULL,
-    extoderlineid INTEGER NOT NULL,
+    extorderlineid INTEGER NOT NULL,
     status VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 );

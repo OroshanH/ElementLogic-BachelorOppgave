@@ -8,6 +8,20 @@ function hentAlle() {
     });
 };
 
+function lagreOutbond(){
+const outbond = {
+quantity: 5,
+produktid: 5,
+extpicklistid: "23",
+extorderid: "23",
+extorderlineid: 5,
+status: "sendt"
+}
+const url = "/lagreOutbond";
+$.post(url,outbond,function(resultat){
+alert("test");
+})
+}
 function formaterData(produkter){
     var ut = "<table class='table table-light table-hover font center-table'>" +
         "<tr>" +
