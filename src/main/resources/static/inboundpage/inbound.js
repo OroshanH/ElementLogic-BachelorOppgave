@@ -8,6 +8,7 @@ function hentAlle() {
     });
 };
 
+
 function formaterData(produkter){
     var ut = "<table class='table table-light table-hover font center-table'>" +
         "<tr>" +
@@ -18,6 +19,8 @@ function formaterData(produkter){
     }
     $("#produktene").html(ut);
 }
+
+
 
 function sendProdukt(id , i) {
     const inbound = {
@@ -76,10 +79,7 @@ function sendProdukt(id , i) {
 
     });
 
-    /*
-    const button = document.getElementById("myButton");
-    button.classList.remove("btn-primary");
-    button.classList.add("btn-success"); */
+
 }
 
 

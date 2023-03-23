@@ -1,25 +1,22 @@
-package oslomet.emanager.produkt;
+package oslomet.emanager.outbound;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-
 @RestController
-public class ProduktPost {
+public class OutboundPost {
 
-    @PostMapping("/produktPost")
+    @PostMapping("/outboundPost")
     public ResponseEntity<String> produktPost(@RequestBody String payload) throws IOException {
-        String url = "http://193.69.50.119/api/products/import";
+        String url = "https://webhook.site/6e5425a6-f29d-495e-9fed-4d4fce5a6557";
         String username = "APIUSER";
         String password = "1994";
 
@@ -47,7 +44,6 @@ public class ProduktPost {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
+
+
 }
-
-
-

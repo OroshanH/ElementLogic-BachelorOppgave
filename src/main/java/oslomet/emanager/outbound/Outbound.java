@@ -1,4 +1,4 @@
-package oslomet.emanager.outbond;
+package oslomet.emanager.outbound;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Outbond {
+public class Outbound {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -18,9 +18,9 @@ public class Outbond {
     private String extorderlineid;
     private String status;
 
-    public Outbond(){}
+    public Outbound(){}
 
-    public Outbond(int id, int quantity, int produktid, String extpicklistid, String extorderid, String extorderlineid, String status){
+    public Outbound(int id, int quantity, int produktid, String extpicklistid, String extorderid, String extorderlineid, String status){
         this.id = id;
         this.quantity = quantity;
         this.produktid = produktid;

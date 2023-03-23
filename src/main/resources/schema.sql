@@ -28,7 +28,7 @@ CREATE TABLE stock
 );
 
 
-CREATE TABLE outbond
+CREATE TABLE outbound
 (
     id INTEGER AUTO_INCREMENT NOT NULL,
     quantity INTEGER NOT NULL,
