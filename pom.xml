@@ -11,10 +11,11 @@
     <groupId>oslomet</groupId>
     <artifactId>emanager</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>emanager</name>
     <description>emanager</description>
     <properties>
-        <java.version>19</java.version>
+        <java.version>17</java.version>
     </properties>
     <dependencies>
         <dependency>
@@ -49,8 +50,12 @@
     </dependencies>
 
     <build>
+        <finalName>emanagerhttp</finalName>
         <plugins>
             <plugin>
+                <configuration>
+                    <executable>true</executable>
+                </configuration>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
