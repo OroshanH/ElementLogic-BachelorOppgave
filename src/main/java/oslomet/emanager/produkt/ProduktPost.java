@@ -1,5 +1,7 @@
 package oslomet.emanager.produkt;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +21,7 @@ public class ProduktPost {
 
     @PostMapping("/produktPost")
     public ResponseEntity<String> produktPost(@RequestBody String payload) throws IOException {
-        String url = "http://193.69.50.119/api/products/import";
+        String url = "https://webhook.site/6e5425a6-f29d-495e-9fed-4d4fce5a6557";
         String username = "APIUSER";
         String password = "1994";
 
@@ -46,6 +48,19 @@ public class ProduktPost {
             conn.disconnect();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
+    }
+
+
+    @PostMapping("/endpoint")
+    public ResponseEntity<String> handlePostRequest(@RequestBody String xmlPayload) {
+        // display the XML payload using alert() function
+        String alertMessage = "Received XML payload: " + xmlPayload;
+        String script = "<script>alert('" + alertMessage + "')</script>";
+
+        // return a response with the alert() function as a part of the body
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML_VALUE)
+                .body(script);
     }
 }
 
