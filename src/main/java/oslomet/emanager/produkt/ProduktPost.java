@@ -8,8 +8,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.IOException;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -51,18 +58,9 @@ public class ProduktPost {
     }
 
 
-    @PostMapping("/endpoint")
-    public ResponseEntity<String> handlePostRequest(@RequestBody String xmlPayload) {
-        // display the XML payload using alert() function
-        String alertMessage = "Received XML payload: " + xmlPayload;
-        String script = "<script>alert('" + alertMessage + "')</script>";
 
-        // return a response with the alert() function as a part of the body
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML_VALUE)
-                .body(script);
-    }
 }
+
 
 
 
