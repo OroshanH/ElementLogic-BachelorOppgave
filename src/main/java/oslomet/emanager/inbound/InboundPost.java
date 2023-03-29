@@ -1,24 +1,21 @@
-package oslomet.emanager.produkt;
+package oslomet.emanager.inbound;
 
 import org.springframework.http.HttpStatus;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import java.io.IOException;
 import java.net.HttpURLConnection;
-
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 @RestController
-public class ProduktPost {
+public class InboundPost {
 
-    @PostMapping("/produktPost")
+    @PostMapping("/inboundPost")
     public ResponseEntity<String> produktPost(@RequestBody String payload) throws IOException {
         String url = "https://webhook.site/6e5425a6-f29d-495e-9fed-4d4fce5a6557";
         String username = "APIUSER";
@@ -50,7 +47,3 @@ public class ProduktPost {
     }
 
 }
-
-
-
-
