@@ -15,12 +15,11 @@ public class InboundRepository {
 
 
     public void lagreInbound(Inbound inbound) {
-        String sql = "MERGE INTO Inbound i USING (VALUES(?, ?, ?, ?, ?)) AS vals(quantity, produktid, purchaseorderid, purchaseorderlineid, status) " +
-                "ON i.produktid = vals.produktid " +
-                "WHEN MATCHED THEN UPDATE SET i.quantity = i.quantity + vals.quantity, i.purchaseorderid = vals.purchaseorderid, i.purchaseorderlineid = vals.purchaseorderlineid, i.status = vals.status " +
-                "WHEN NOT MATCHED THEN INSERT (quantity, produktid, purchaseorderid, purchaseorderlineid, status) VALUES (vals.quantity, vals.produktid, vals.purchaseorderid, vals.purchaseorderlineid, vals.status)";
+        String sql = "INSERT INTO Inbound (quantity, produktid, purchaseorderid, purchaseorderlineid, status) VALUES (?, ?, ?, ?, ?) " +
+                "ON DUPLICATE KEY UPDATE quantity = quantity + VALUES(quantity), purchaseorderid = VALUES(purchaseorderid), purchaseorderlineid = VALUES(purchaseorderlineid), status = VALUES(status)";
         db.update(sql, inbound.getQuantity(), inbound.getProduktid(), inbound.getPurchaseorderid(), inbound.getPurchaseorderlineid(), inbound.getStatus());
     }
+
 
 
     public List<Inbound> hentAlleInbound(){
