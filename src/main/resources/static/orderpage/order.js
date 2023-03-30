@@ -3,9 +3,10 @@ $(function(){
 });
 
 function hentAlle() {
-    $.get( "/hentAlleInbound", function( inboundData ) {
-    $.get("/hentAlle"), function(produktData)
+    $.get( "/hentAlleInbound", function(inboundData) {
+    $.get("/hentAlle"), function(produktData){
         formaterData(inboundData,produktData);
+    });
     });
 };
 
