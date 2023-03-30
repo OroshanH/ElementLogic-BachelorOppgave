@@ -3,12 +3,12 @@ $(function(){
 });
 
 function hentAlle() {
-    $.get( "/hentAlleInbound", function(inboundData) {
-    $.get("/hentAlle"), function(produktData){
-        formaterData(inboundData,produktData);
+  $.get( "/hentAlleInbound", function( inboundData ) {
+    $.get( "/hentAlle", function( produkterData ) {
+      formaterData(inboundData, produkterData);
     });
-    });
-};
+  });
+}
 
  let valgtOutbound = [];
  var x = 1;
@@ -88,7 +88,7 @@ function formaterData(inboundData,produktData){
         "<th scope='col'>ProduktID</th><th scope='col'>Navn</th><th scope='col'>Beskrivelse</th><th scope='col'>Antall</th><th scope='col'>Send</th>" +
         "</tr>";
     for(let i in inboundData ){
-        ut+="<tr><td>"+inboundData[i].produktid+"</td><td>"+produktData[i].navn+"</td><td>"+produktData[i].beskrivelse+"</td><td>" +  "<input type='number' min='0' id='quantity" + i + "'>" + "</td>" + "<td>" + "<button id='myButton' onclick='lagreOutbound(" + produkter[i].produktid + ", " + i + ")' class='btn btn-primary'>Velg</button>" + "</td> </tr>"
+        ut+="<tr><td>"+inboundData[i].produktid+"</td><td>"+produktData[i].navn+"</td><td>"+produktData[i].beskrivelse+"</td><td>" +  "<input type='number' min='0' id='quantity" + i + "'>" + "</td>" + "<td>" + "<button id='myButton' onclick='lagreOutbound(" + inboundData[i].produktid + ", " + i + ")' class='btn btn-primary'>Velg</button>" + "</td> </tr>"
     }
     $("#produktene").html(ut);
 }
