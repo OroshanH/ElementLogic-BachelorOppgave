@@ -3,7 +3,7 @@ $(function(){
 });
 
 function hentAlle() {
-    $.get( "/hentAlle", function( data ) {
+    $.get( "/hentAlleInbound", function( data ) {
         formaterData(data);
     });
 };
