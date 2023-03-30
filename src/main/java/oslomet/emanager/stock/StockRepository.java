@@ -16,14 +16,12 @@ public class StockRepository {
     private JdbcTemplate db;
 
     public void lagreStock(Stock stock) {
-        String sql = "MERGE INTO Stock s " +
-                "USING (VALUES (?, ?)) AS vals(quantity, produktid) " +
-                "ON s.produktid = vals.produktid " +
-                "WHEN MATCHED THEN UPDATE SET s.quantity = s.quantity + vals.quantity " +
-                "WHEN NOT MATCHED THEN INSERT (quantity, produktid) VALUES (vals.quantity, vals.produktid)";
+        String sql = "INSERT INTO Stock (quantity, produktid) VALUES (?, ?) " +
+                "ON DUPLICATE KEY UPDATE quantity = quantity + VALUES(quantity)";
 
         db.update(sql, stock.getQuantity(), stock.getProduktid());
     }
+
 
 
     public List<Produkt> hentStock() {
