@@ -28,7 +28,7 @@ function sendProdukt(id , i) {
         produktid : id,
         purchaseorderid: i,
         purchaseorderlineid: i,
-        status: 0
+        status: "Ikke sendt"
     };
     const stock = {
         quantity : parseInt($("#quantity" + i).val()),

@@ -56,7 +56,7 @@ function hentAlle() {
 };
 
 function formaterData(produkter){
-    var ut = "<table class='table font center-table'>" +
+    var ut = "<table class='table table-light table-hover font center-table'>" +
         "<tr>" +
         "<th scope='col' class='thLabel'>ProduktID</th><th scope='col' class='thLabel'>Navn</th><th scope='col' class='thLabel'>Beskrivelse</th><th scope='col' class='thLabel'>Slett Produkt</th>" +
         "</tr>";

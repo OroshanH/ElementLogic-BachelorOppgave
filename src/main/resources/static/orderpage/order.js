@@ -15,32 +15,60 @@ function hentAlle() {
  var x = 1;
  var extorderlineid = 0;
 
-function lagreOutbound(id, i){
- $.get( "/hentAlle", function( produkter ) {
+function toggleInputField(i) {
+  const quantityInput = $("#quantity" + i);
+  const velgButton = $("#velgButton" + i);
+  if (quantityInput.prop("readonly")) {
+    quantityInput.prop("readonly", false);
+    quantityInput.css("opacity", "1");
+    velgButton.text("Velg");
+  } else {
+    quantityInput.prop("readonly", true);
+    quantityInput.css("opacity", "0.5");
+    velgButton.text("Valgt");
+  }
+}
 
+function lagreOutbound(id, i) {
+  $.get("/hentAlle", function(produkter) {
+    const outbound = {
+      quantity: parseInt($("#quantity" + i).val()),
+      produktid: produkter[i].produktid,
+      extpicklistid: x,
+      extorderid: x,
+      extorderlineid: extorderlineid,
+      status: "sendt"
+    }
 
- const outbound = {
- quantity: parseInt($("#quantity" + i).val()),
- produktid: produkter[i].produktid,
- extpicklistid: x,
- extorderid: x,
- extorderlineid: extorderlineid,
- status: "sendt"
- }
-
- valgtOutbound.push({outbound: outbound});
-  $("#quantity" + i).val("");
- });
-extorderlineid++;
- }
+    valgtOutbound.push({
+      outbound: outbound
+    });
+    toggleInputField(i);
+  });
+  extorderlineid++;
+}
 
  function lagreValgte() {
      const url = "/lagreOutbound";
+        toggleInputField();
+        function toggleInputField() {
+          const quantityInput = $(".inputReset");
+          const velgButton = $(".btnVelg");
+
+            quantityInput.prop("readonly", false);
+            quantityInput.css("opacity", "1");
+            velgButton.text("Velg");
+            $(".inputReset").val("");
+
+        }
 
      valgtOutbound.forEach(function(valgtOutbounds) {
+
         $.post(url, valgtOutbounds.outbound, function(resultat) {
+
             console.log("Sendt outbound");
             valgtOutbound = [];
+
         });
      });
      alert("Valgte produkter er sendt");
@@ -83,21 +111,21 @@ extorderlineid++;
  }
 
 
-function formaterData(inboundData, produkterData) {
+function formaterData(inboundData, produktData) {
   var ut = "<table class='table table-light table-hover font center-table'>" +
-      "<tr>" +
-      "<th scope='col'>ProduktID</th><th scope='col'>Navn</th><th scope='col'>Beskrivelse</th><th scope='col'>Antall</th><th scope='col'>Status</th>" +
-      "</tr>";
+    "<tr>" +
+    "<th scope='col' class='thLabel'>ProduktID</th><th scope='col' class='thLabel'>Navn</th><th scope='col' class='thLabel'>Beskrivelse</th><th scope='col' class='thLabel'>Antall</th><th scope='col' class='thLabel'>Send</th><th scope='col' class='thLabel'>Status</th>" +
+    "</tr>";
 
   for (let i in inboundData) {
-    for (let j in produkterData) {
-      if (inboundData[i].produktid === produkterData[j].produktid) {
-        ut += "<tr><td>" + inboundData[i].produktid + "</td><td>" + produkterData[j].navn + "</td><td>" + produkterData[j].beskrivelse + "</td><td>" + inboundData[i].quantity + "</td><td>"+ inboundData[i].status + "</td></tr>";
-        break;
-      }
+    let produktIndex = produktData.findIndex(p => p.produktid === inboundData[i].produktid);
+    if (produktIndex >= 0) {
+      ut += "<tr><td class='th'>" + inboundData[i].produktid + "</td><td class='th'>" + produktData[produktIndex].navn + "</td><td class='thB'>" + produktData[produktIndex].beskrivelse + "</td><td class='th'>" + "<input type='number' min='0' class='inputReset'  id='quantity" + i + "'>" + "</td>" + "<td>" + "<button id='velgButton" + i + "' onclick='lagreOutbound(" + inboundData[i].produktid + ", " + i + ")' class='btnVelg'>Velg</button>" + "</td><td>" + inboundData[i].status + "</td> </tr>";
     }
   }
 
   ut += "</table>";
   $("#produktene").html(ut);
 }
+
+

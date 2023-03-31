@@ -17,13 +17,13 @@ public class Inbound {
 
     private int purchaseorderid;
     private int purchaseorderlineid;
-    private int status;
+    private String status;
 
     public Inbound(){
 
     }
 
-    public Inbound(int id, int quantity, int produktid, int purchaseorderid, int purchaseorderlineid, int status){
+    public Inbound(int id, int quantity, int produktid, int purchaseorderid, int purchaseorderlineid, String status){
         this.id = id;
         this.quantity = quantity;
         this.produktid = produktid;
@@ -47,7 +47,7 @@ public class Inbound {
     public int getPurchaseorderlineid(){return purchaseorderlineid;}
     public void setPurchaseorderlineid(int purchaseorderlineid){this.purchaseorderlineid = purchaseorderlineid;}
 
-    public int getStatus(){return status;}
-    public void setStatus(int status){this.status = status;}
+    public String getStatus(){return status;}
+    public void setStatus(String status){this.status = status;}
 
 }

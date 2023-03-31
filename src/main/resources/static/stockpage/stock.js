@@ -20,7 +20,7 @@ function formaterData(inboundData, produkterData) {
   for (let i in inboundData) {
     for (let j in produkterData) {
       if (inboundData[i].produktid === produkterData[j].produktid) {
-        ut += "<tr><td class='th'>" + inboundData[i].produktid + "</td><td class='th'>" + produkterData[j].navn + "</td><td class='th'>" + produkterData[j].beskrivelse + "</td><td class='th'>" + inboundData[i].quantity + "</td> </tr>";
+        ut += "<tr><td class='th'>" + inboundData[i].produktid + "</td><td class='th'>" + produkterData[j].navn + "</td><td class='thB'>" + produkterData[j].beskrivelse + "</td><td class='th'>" + inboundData[i].quantity + "</td> </tr>";
         break;
       }
     }
