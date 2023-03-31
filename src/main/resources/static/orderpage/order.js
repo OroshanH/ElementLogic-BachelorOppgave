@@ -8,6 +8,7 @@ function hentAlle() {
       formaterData(inboundData, produkterData);
     });
   });
+
 }
 
  let valgtOutbound = [];
@@ -82,13 +83,21 @@ extorderlineid++;
  }
 
 
-function formaterData(inboundData,produktData){
-    var ut = "<table class='table table-light table-hover font center-table'>" +
-        "<tr>" +
-        "<th scope='col'>ProduktID</th><th scope='col'>Navn</th><th scope='col'>Beskrivelse</th><th scope='col'>Antall</th><th scope='col'>Send</th>" +
-        "</tr>";
-    for(let i in inboundData ){
-        ut+="<tr><td>"+inboundData[i].produktid+"</td><td>"+produktData[i].navn+"</td><td>"+produktData[i].beskrivelse+"</td><td>" +  "<input type='number' min='0' id='quantity" + i + "'>" + "</td>" + "<td>" + "<button id='myButton' onclick='lagreOutbound(" + inboundData[i].produktid + ", " + i + ")' class='btn btn-primary'>Velg</button>" + "</td> </tr>"
+function formaterData(inboundData, produkterData) {
+  var ut = "<table class='table table-light table-hover font center-table'>" +
+      "<tr>" +
+      "<th scope='col'>ProduktID</th><th scope='col'>Navn</th><th scope='col'>Beskrivelse</th><th scope='col'>Antall</th><th scope='col'>Status</th>" +
+      "</tr>";
+
+  for (let i in inboundData) {
+    for (let j in produkterData) {
+      if (inboundData[i].produktid === produkterData[j].produktid) {
+        ut += "<tr><td>" + inboundData[i].produktid + "</td><td>" + produkterData[j].navn + "</td><td>" + produkterData[j].beskrivelse + "</td><td>" + inboundData[i].quantity + "</td><td>"+ inboundData[i].status + "</td></tr>";
+        break;
+      }
     }
-    $("#produktene").html(ut);
+  }
+
+  ut += "</table>";
+  $("#produktene").html(ut);
 }

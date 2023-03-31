@@ -35,9 +35,9 @@ public class InboundGet {
                 String actualQuantity = missionElement.getElementsByTagName("ActualQuantity").item(0).getTextContent();
                 String extProductId = ((Element) missionElement.getParentNode().getParentNode()).getElementsByTagName("ExtProductId").item(0).getTextContent();
                 int quantity = (int) Double.parseDouble(actualQuantity);
-                String sql = "UPDATE Inbound SET quantity = ? WHERE produktid = ?";
+                String sql = "UPDATE Stock SET quantity = ? WHERE produktid = ?";
                 int rowsAffected = jdbcTemplate.update(sql, quantity, extProductId);
-                System.out.println(rowsAffected + " rows updated for produktid " + extProductId);
+
             }
             return ResponseEntity.ok("OK");
         } catch (Exception e) {

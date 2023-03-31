@@ -1,10 +1,11 @@
 body {
-  background-color: #34495E;
+  background-color: rgba(151, 153, 155, 0.2);
 }
 
 .topnav {
   background-color: white;
   overflow: hidden;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 .topnav a {
   float: right;
@@ -26,12 +27,23 @@ body {
   margin-right: 0px;
 }
 
+.active{
+    font-weight: bold;
+}
+
 .table-height {
   height: 500px;
 }
 .table-title {
   text-align: center;
+  color: black;
   font-family: 'Roboto', sans-serif;
+
+}
+.input-title{
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    margin-left: 5%;
 }
 .font {
   font-family: 'Roboto', sans-serif;
@@ -39,28 +51,31 @@ body {
 
 .main-content{
   display: flex;
-  background-color: #34495E;
   height: 100%;
+
 }
 
 .left-side-registration-box{
   display: flex;
   flex-direction: column;
-  background-color: #97999b; /*  #97999b */
+  background-color: #ffffff; /*  #97999b */
   margin: 30px;
   height: 70%; /* For å justere høyden til registrerings boksen */
   width: 25%;
-  border-radius: 5px 5px 5px 5px;
-
+  border-radius: 0;
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
 }
 .right-side-table {
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: #ffffff;
   margin: 30px;
   height: 75%; /* For å justere høyden til tabell div'en */
   width: 75%;
-  border-radius: 5px 5px 5px 5px;
+  border-radius: 0;
+  color: #B9132F;
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+
 }
 .center-table {
   margin: auto;
@@ -72,55 +87,63 @@ body {
 
 div.settings {
   display:grid;
-  margin-top: 20px;
-  margin-left: 20px;
+  margin-top: 2%;
+  margin-left: 10%;
   grid-template-columns: max-content max-content;
   grid-gap:5px;
 }
 div.settings label {
+  font-size: 18px;
   text-align: right;
   margin-top: 5px;
-  color: black; /* black */
+  color: black;
+  font-family: 'Roboto', sans-serif;
+   font-weight: 600;
 }
 
 .button-width {
+  width: 20%;
+  height: 40px;
+  text-align: center;
+  margin-left: 40%;
+  border-radius: 0;
+  margin-top: 2%;
+  color: #ffffff;
+  background-color: #B9132F;
+  border-color: #B9132F;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+   box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+
+}
+
+.settings input {
+ box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+}
+
+.btnSlett{
+  color: #ffffff;
+  background-color: #B9132F;
+  border-color: #B9132F;
+  font-family: 'Roboto', sans-serif;
   width: 25%;
-  text-align: left;
-  margin-left: 100px;
-}
-/* Trengs ikke kanskje?
-label {
-  font-weight: bold;
-  margin-bottom: 10px;
-  margin-right: 5px;
-  text-align: right;
-} */
-/* Brukes ikke?
-textarea {
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 20px;
-} */
-
-/*
-input:focus,
-textarea:focus {
-  outline: none;
-  border-color: #666;
+  height: 30px;
+  margin-left: -2%;
+   box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
 }
 
-@media (max-width: 767px) {
-  .form-group {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-} */
+.th{
+color: black;
+}
+
+.thB{
+color: black;
+word-break: break-all;
+width: 40%;
+}
 
 
-
-
-
-
-
-
+.thLabel{
+font-size: 16px;
+color: black;
+}

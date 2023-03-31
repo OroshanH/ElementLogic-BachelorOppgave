@@ -2,6 +2,7 @@
 .topnav {
   background-color: white;
   overflow: hidden;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 .topnav a {
   float: right;
@@ -33,7 +34,8 @@
 }
 
 body {
-  background-color: #34495E;
+  background-color: rgba(151, 153, 155, 0.2);
+
 }
 
 .right-side-table {
@@ -44,14 +46,15 @@ body {
   height: 75%; /* For å justere høyden til tabell div'en */
   width: 75%;
   border-radius: 5px 5px 5px 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 .center-table-div {
   margin: auto;
   width: 90%;
 }
 .margin-table-div {
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 5%;
+
 }
 
 .center-table {
@@ -62,4 +65,27 @@ body {
 .table-title {
   text-align: center;
   font-family: 'Roboto', sans-serif;
+}
+
+
+.btnSend{
+  color: #ffffff;
+  background-color: #B9132F;
+  border-color: #B9132F;
+  font-family: 'Roboto', sans-serif;
+  width: 35%;
+  height: 30px;
+  margin-left: -2%;
+   box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+}
+
+.thLabel{
+font-size: 16px;
+color: black;
+}
+
+.thB{
+color: black;
+word-break: break-all;
+width: 40%;
 }
