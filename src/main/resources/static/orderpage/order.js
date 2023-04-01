@@ -43,6 +43,9 @@ function lagreOutbound(id, i) {
       outbound: outbound
     });
     toggleInputField(i);
+        $.get("/hentConstant", function(constant){
+             $.post("/oppdaterY", {y: constant[0].y + 1}, function(result){});
+             });
    });
  });
 }
@@ -71,13 +74,14 @@ function lagreOutbound(id, i) {
         });
      });
      alert("Valgte produkter er sendt");
-      $.get("/hentConstant", function(constant){
-         $.post("/oppdaterY", {y: constant[0].y + 1}, function(result){});
-         });
+
     outboundPost();
 
 
      function outboundPost() {
+      $.get("/hentConstant", function(constant){
+         $.post("/oppdaterX", {x: constant[0].x + 1}, function(result){});
+         });
        const url = "/outboundPost";
      let xmlPayload = '<?xml version="1.0" encoding="UTF-8"?>';
      xmlPayload += '\n<ImportOperation>';
@@ -111,9 +115,7 @@ function lagreOutbound(id, i) {
                           });
      }
 
-    $.get("/hentConstant", function(constant){
-    $.post("/oppdaterX", {x: constant[0].x + 1}, function(result){});
-    });
+
  }
 
 
