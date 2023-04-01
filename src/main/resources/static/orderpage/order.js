@@ -12,8 +12,7 @@ function hentAlle() {
 }
 
  let valgtOutbound = [];
- var x = 1;
- var extorderlineid = 0;
+
 
 function toggleInputField(i) {
   const quantityInput = $("#quantity" + i);
@@ -31,21 +30,21 @@ function toggleInputField(i) {
 
 function lagreOutbound(id, i) {
   $.get("/hentAlle", function(produkter) {
+  $.get("/hentConstant", function(constant){
     const outbound = {
       quantity: parseInt($("#quantity" + i).val()),
       produktid: produkter[i].produktid,
-      extpicklistid: x,
-      extorderid: x,
-      extorderlineid: extorderlineid,
+      extpicklistid: constant[0].x,
+      extorderid: constant[0].x,
+      extorderlineid: constant[0].y,
       status: "sendt"
     }
-
     valgtOutbound.push({
       outbound: outbound
     });
     toggleInputField(i);
-  });
-  extorderlineid++;
+   });
+ });
 }
 
  function lagreValgte() {
@@ -73,6 +72,7 @@ function lagreOutbound(id, i) {
      });
      alert("Valgte produkter er sendt");
     outboundPost();
+
 
      function outboundPost() {
        const url = "/outboundPost";
@@ -107,7 +107,10 @@ function lagreOutbound(id, i) {
                               console.error('Error calling function:', error);
                           });
      }
-     x++;
+
+    $.get("/hentConstant", function(constant){
+    $.post("/oppdaterConstant", {x: constant[0].x + 1, y: constant[0].y + 1}, function(result){});
+    });
  }
 
 

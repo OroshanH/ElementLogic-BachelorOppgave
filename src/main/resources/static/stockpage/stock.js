@@ -3,7 +3,7 @@ $(function(){
 });
 
 function hentAlleInbound() {
-  $.get( "/hentAlleInbound", function( inboundData ) {
+  $.get( "/hentStock", function( inboundData ) {
     $.get( "/hentAlle", function( produkterData ) {
       formaterData(inboundData, produkterData);
     });
