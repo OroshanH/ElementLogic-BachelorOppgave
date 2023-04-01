@@ -71,6 +71,9 @@ function lagreOutbound(id, i) {
         });
      });
      alert("Valgte produkter er sendt");
+      $.get("/hentConstant", function(constant){
+         $.post("/oppdaterY", {y: constant[0].y + 1}, function(result){});
+         });
     outboundPost();
 
 
@@ -109,7 +112,7 @@ function lagreOutbound(id, i) {
      }
 
     $.get("/hentConstant", function(constant){
-    $.post("/oppdaterConstant", {x: constant[0].x + 1, y: constant[0].y + 1}, function(result){});
+    $.post("/oppdaterX", {x: constant[0].x + 1}, function(result){});
     });
  }
 

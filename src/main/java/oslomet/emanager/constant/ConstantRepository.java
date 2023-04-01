@@ -22,9 +22,14 @@ public class ConstantRepository {
         return alleConstant;
     }
 
-    public void oppdaterConstant(int x, int y) {
-        String sql = "UPDATE Constant SET x = ?, y = ? WHERE id = ?";
-        db.update(sql, x, y, 1);
+    public void oppdaterX(int x) {
+        String sql = "UPDATE Constant SET x = ? WHERE id = ?";
+        db.update(sql, x, 1);
+    }
+
+    public void oppdaterY(int y) {
+        String sql = "UPDATE Constant SET y = ? WHERE id = ?";
+        db.update(sql, y, 1);
     }
 
 

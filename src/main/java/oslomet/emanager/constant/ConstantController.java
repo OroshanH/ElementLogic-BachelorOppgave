@@ -22,9 +22,14 @@ public class ConstantController {
         return rep.hentConstant();
     }
 
-    @PostMapping("/oppdaterConstant")
-    public void oppdaterConstant(@RequestParam int x, @RequestParam int y) {
-        rep.oppdaterConstant(x, y);
+    @PostMapping("/oppdaterX")
+    public void oppdaterX(@RequestParam int x) {
+        rep.oppdaterX(x);
+    }
+
+    @PostMapping("/oppdaterY")
+    public void oppdaterY(@RequestParam int y) {
+        rep.oppdaterY(y);
     }
 
 
