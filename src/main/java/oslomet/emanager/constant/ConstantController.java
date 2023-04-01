@@ -16,8 +16,7 @@ public class ConstantController {
     @Autowired
     ConstantRepository rep;
 
-    @PostMapping("/lagreConstant")
-    public void lagreConstant(Constant innConstant){rep.lagreConstant(innConstant);}
+
     @GetMapping("/hentConstant")
     public List<Produkt> hentConstant(){
         return rep.hentConstant();

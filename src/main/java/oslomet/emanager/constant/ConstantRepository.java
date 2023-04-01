@@ -16,15 +16,6 @@ public class ConstantRepository {
     @Autowired
     private JdbcTemplate db;
 
-    public void lagreConstant(Constant constant) {
-        String sql = "INSERT INTO Constant (x) VALUES (?)";
-
-
-        db.update(sql, constant.getX());
-    }
-
-
-
     public List<Produkt> hentConstant() {
         String sql = "SELECT * FROM Constant";
         List<Produkt> alleConstant = db.query(sql,new BeanPropertyRowMapper(Constant.class));
