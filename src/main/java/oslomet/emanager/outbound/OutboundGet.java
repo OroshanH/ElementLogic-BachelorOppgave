@@ -42,7 +42,7 @@ public class OutboundGet {
                 if (productElement != null) {
                     String productNo = productElement.getElementsByTagName("ProductNo").item(0).getTextContent();
                     int quantity = Integer.parseInt(pickedQuantity);
-                    String sql = "UPDATE Stock SET quantity = ? WHERE produktid = ?";
+                    String sql = "UPDATE Stock SET quantity = quantity - ? WHERE produktid = ?";
                     int rowsAffected = jdbcTemplate.update(sql, quantity, productNo);
                     System.out.println("Product No: " + productNo);
                 }
