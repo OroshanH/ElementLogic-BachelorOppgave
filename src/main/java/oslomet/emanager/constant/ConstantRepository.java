@@ -31,6 +31,10 @@ public class ConstantRepository {
         String sql = "UPDATE Constant SET y = ? WHERE id = ?";
         db.update(sql, y, 1);
     }
+    public void oppdaterZ(int z) {
+        String sql = "UPDATE Constant SET z = ? WHERE id = ?";
+        db.update(sql, z, 1);
+    }
 
 
 

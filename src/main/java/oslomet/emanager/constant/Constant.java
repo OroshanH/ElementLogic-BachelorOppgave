@@ -14,14 +14,16 @@ public class Constant {
     private int x;
 
     private int y;
+    private int z;
 
     public Constant(){
     }
 
-    public Constant(int id, int x){
+    public Constant(int id, int x, int y,int z){
         this.id = id;
         this.x = x;
         this.y = y;
+        this.z = z;
     }
 
     public int getId(){return id;}
@@ -36,7 +38,9 @@ public class Constant {
 
     public void setY(int y){this.y = y;}
 
+    public int getZ(){return z;}
 
+    public void setZ(int z){this.z = z;}
 
 
 }

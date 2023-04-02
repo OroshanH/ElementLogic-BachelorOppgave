@@ -32,6 +32,11 @@ public class ConstantController {
         rep.oppdaterY(y);
     }
 
+   @PostMapping("/oppdaterZ")
+    public void oppdaterZ(@RequestParam int z) {
+        rep.oppdaterZ(z);
+    }
+
 
 
 
