@@ -23,13 +23,15 @@ function formaterData(produkter){
 
 
 function sendProdukt(id , i) {
+     $.get("/hentConstant", function(constant){
     const inbound = {
         quantity : parseInt($("#quantity" + i).val()),
         produktid : id,
-        purchaseorderid: i,
-        purchaseorderlineid: i,
+        purchaseorderid: constant[0].x,
+        purchaseorderlineid: constant[0].x,
         status: "Ikke sendt"
     };
+    });
     const stock = {
         quantity : parseInt($("#quantity" + i).val()),
         produktid : id
