@@ -82,7 +82,6 @@ function lagreOutbound(id, i) {
         $.post(url, valgtOutbounds.outbound, function(resultat) {
 
         const produktid = valgtOutbounds.outbound.produktid;
-        alert(produktid);
         oppdaterProduktStatus(produktid);
 
             console.log("Sendt outbound");
@@ -90,7 +89,6 @@ function lagreOutbound(id, i) {
 
         });
      });
-     alert("Valgte produkter er sendt");
 
     outboundPost();
 

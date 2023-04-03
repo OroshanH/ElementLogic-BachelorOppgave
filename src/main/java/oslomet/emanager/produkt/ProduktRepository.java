@@ -30,6 +30,4 @@ public class ProduktRepository {
         db.update(sql, id);
     }
 
-
-
 }
