@@ -20,7 +20,7 @@ public class ProduktPost {
 
     @PostMapping("/produktPost")
     public ResponseEntity<String> produktPost(@RequestBody String payload) throws IOException {
-        String url = "http://193.69.50.119/api/products/import";
+        String url = "193.69.50.119/api/products/import";
         String username = "APIUSER";
         String password = "1994";
 

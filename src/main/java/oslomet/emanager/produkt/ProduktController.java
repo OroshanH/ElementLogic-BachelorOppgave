@@ -28,9 +28,6 @@ public class ProduktController {
         rep.slettAlleProdukter(id);
     }
 
-    @GetMapping("/ping")
-    public ResponseEntity<String> ping() {
-        return ResponseEntity.ok("pong");
-    }
+
 
 }

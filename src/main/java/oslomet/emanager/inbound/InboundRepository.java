@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+
 import java.util.List;
 
 @Repository
@@ -20,12 +21,17 @@ public class InboundRepository {
         db.update(sql, inbound.getQuantity(), inbound.getProduktid(), inbound.getPurchaseorderid(), inbound.getPurchaseorderlineid(), inbound.getStatus());
     }
 
-
-
     public List<Inbound> hentAlleInbound(){
         String sql = "SELECT * FROM Inbound";
         List<Inbound> alleInbound = db.query(sql,new BeanPropertyRowMapper(Inbound.class));
         return alleInbound;
     }
+    public void oppdaterStatus(int produktid) {
+        String sql = "UPDATE Inbound SET status = 'Sendt' WHERE produktid = ?";
+        db.update(sql, produktid);
+    }
+
+
 
 }
+

@@ -5,10 +5,13 @@ $(function(){
 function hentAlle() {
   $.get( "/hentAlleInbound", function( inboundData ) {
     $.get( "/hentAlle", function( produkterData ) {
-      formaterData(inboundData, produkterData);
+    $.get( "/hentAlleOutbound", function( outboundData ) {
+    $.get( "/hentStock", function( stockData ) {
+      formaterData(inboundData, produkterData, outboundData, stockData);
     });
   });
-
+});
+ });
 }
 
  let valgtOutbound = [];
@@ -27,30 +30,40 @@ function toggleInputField(i) {
     velgButton.text("Valgt");
   }
 }
-
 function lagreOutbound(id, i) {
-  $.get("/hentAlle", function(produkter) {
+ $.get("/hentAlle", function(produkter) {
   $.get("/hentConstant", function(constant){
-    const outbound = {
-      quantity: parseInt($("#quantity" + i).val()),
-      produktid: produkter[i].produktid,
-      extpicklistid: constant[0].x,
-      extorderid: constant[0].x,
-      extorderlineid: constant[0].y,
-      status: "sendt"
-    }
-    valgtOutbound.push({
-      outbound: outbound
-    });
+  const existingIndex = valgtOutbound.findIndex(obj => obj.outbound.produktid === produkter[i].produktid);
+
+  if (existingIndex !== -1) {
+    valgtOutbound.splice(existingIndex, 1);
     toggleInputField(i);
+  } else {
+        const outbound = {
+          quantity: parseInt($("#quantity" + i).val()),
+          produktid: produkter[i].produktid,
+          extpicklistid: constant[0].x,
+          extorderid: constant[0].x,
+          extorderlineid: constant[0].y,
+          status: "Ikke Sendt"
+        }
+        valgtOutbound.push({
+          outbound: outbound
+        });
+        toggleInputField(i);
         $.get("/hentConstant", function(constant){
-             $.post("/oppdaterY", {y: constant[0].y + 1}, function(result){});
-             });
-   });
- });
+          $.post("/oppdaterY", {y: constant[0].y + 1}, function(result){});
+        });
+      }
+    });
+  });
 }
 
+
  function lagreValgte() {
+ if (valgtOutbound.length === 0) {
+     throw new Error("Ingen Produkter Valgt");
+   }
      const url = "/lagreOutbound";
         toggleInputField();
         function toggleInputField() {
@@ -67,6 +80,10 @@ function lagreOutbound(id, i) {
      valgtOutbound.forEach(function(valgtOutbounds) {
 
         $.post(url, valgtOutbounds.outbound, function(resultat) {
+
+        const produktid = valgtOutbounds.outbound.produktid;
+        alert(produktid);
+        oppdaterProduktStatus(produktid);
 
             console.log("Sendt outbound");
             valgtOutbound = [];
@@ -99,7 +116,6 @@ function lagreOutbound(id, i) {
      xmlPayload += '\n  </Lines>';
      xmlPayload += '\n</ImportOperation>';
 
-
            fetch('/outboundPost', {
                               method: 'POST',
                               headers: {
@@ -114,26 +130,37 @@ function lagreOutbound(id, i) {
                               console.error('Error calling function:', error);
                           });
      }
-
-
  }
 
 
-function formaterData(inboundData, produktData) {
+
+function formaterData(inboundData, produktData, outboundData, stockData) {
   var ut = "<table class='table table-light table-hover font center-table'>" +
     "<tr>" +
-    "<th scope='col' class='thLabel'>ProduktID</th><th scope='col' class='thLabel'>Navn</th><th scope='col' class='thLabel'>Beskrivelse</th><th scope='col' class='thLabel'>Antall</th><th scope='col' class='thLabel'>Send</th><th scope='col' class='thLabel'>Status</th>" +
+    "<th scope='col' class='thLabel'>ProduktID</th><th scope='col' class='thLabel'>Produkt Navn</th><th scope='col' class='thLabel'>Beskrivelse</th><th scope='col' class='thLabel'>Antall</th><th scope='col' class='thLabel'>Send</th><th scope='col' class='thLabel'>Status</th>" +
     "</tr>";
 
   for (let i in inboundData) {
     let produktIndex = produktData.findIndex(p => p.produktid === inboundData[i].produktid);
     if (produktIndex >= 0) {
-      ut += "<tr><td class='th'>" + inboundData[i].produktid + "</td><td class='th'>" + produktData[produktIndex].navn + "</td><td class='thB'>" + produktData[produktIndex].beskrivelse + "</td><td class='th'>" + "<input type='number' min='0' class='inputReset'  id='quantity" + i + "'>" + "</td>" + "<td>" + "<button id='velgButton" + i + "' onclick='lagreOutbound(" + inboundData[i].produktid + ", " + i + ")' class='btnVelg'>Velg</button>" + "</td><td>" + inboundData[i].status + "</td> </tr>";
+      ut += "<tr><td class='th'>" + inboundData[i].produktid + "</td><td class='th'>" + produktData[produktIndex].navn + "</td><td class='thB'>" + produktData[produktIndex].beskrivelse + "</td><td class='th'>" + "<input type='number' min='1' max='"+ stockData[i].quantity +"' class='inputReset'  id='quantity" + i + "'>" + "</td>" + "<td>" + "<button id='velgButton" + i + "' onclick='lagreOutbound(" + inboundData[i].produktid + ", " + i + ")' class='btnVelg'>Velg</button>" + "</td><td>" + inboundData[i].status + "</td> </tr>";
     }
   }
 
   ut += "</table>";
   $("#produktene").html(ut);
 }
+
+
+
+function oppdaterProduktStatus(produktid) {
+  const url = "/oppdaterStatus/" + produktid;
+  $.ajax({
+    url: url,
+    type: "PUT",
+    success: function(resultat) {location.reload();}
+  });
+}
+
 
 

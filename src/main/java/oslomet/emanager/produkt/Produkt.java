@@ -14,6 +14,7 @@ public class Produkt {
     private String navn;
     private String beskrivelse;
 
+
     public Produkt(){
     }
 
@@ -39,8 +40,6 @@ public class Produkt {
     public String getBeskrivelse(){return beskrivelse;}
 
     public void setBeskrivelse(String beskrivelse){this.beskrivelse = beskrivelse;}
-
-
 
 
 

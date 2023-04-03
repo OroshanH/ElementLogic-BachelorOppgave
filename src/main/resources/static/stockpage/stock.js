@@ -14,7 +14,7 @@ function hentAlleInbound() {
 function formaterData(inboundData, produkterData) {
   var ut = "<table class='table table-light table-hover font center-table'>" +
       "<tr>" +
-      "<th scope='col' class=thLabel>ProduktID</th><th scope='col' class=thLabel>Navn</th><th scope='col' class=thLabel>Beskrivelse</th><th scope='col' class=thLabel>Antall</th>" +
+      "<th scope='col' class=thLabel>ProduktID</th><th scope='col' class=thLabel>Produkt Navn</th><th scope='col' class=thLabel>Beskrivelse</th><th scope='col' class=thLabel>Antall</th>" +
       "</tr>";
 
   for (let i in inboundData) {

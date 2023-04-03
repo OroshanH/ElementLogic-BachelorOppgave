@@ -7,7 +7,7 @@ function regProdukt() {
   const produkt = {
     produktid: parseInt($("#produktid").val()),
     navn: $("#navn").val(),
-    beskrivelse: $("#beskrivelse").val()
+    beskrivelse: $("#beskrivelse").val(),
   };
 
   const url = "/lagre";
@@ -40,6 +40,7 @@ function regProdukt() {
            .catch(error => {
                console.error('Error calling function:', error);
            });
+
        });
        });
 
@@ -58,7 +59,7 @@ function hentAlle() {
 function formaterData(produkter){
     var ut = "<table class='table table-light table-hover font center-table'>" +
         "<tr>" +
-        "<th scope='col' class='thLabel'>ProduktID</th><th scope='col' class='thLabel'>Navn</th><th scope='col' class='thLabel'>Beskrivelse</th><th scope='col' class='thLabel'>Slett Produkt</th>" +
+        "<th scope='col' class='thLabel'>ProduktID</th><th scope='col' class='thLabel'>Produkt Navn</th><th scope='col' class='thLabel'>Beskrivelse</th><th scope='col' class='thLabel'>Slett Produkt</th>" +
         "</tr>";
     for(let i in produkter ){
         ut+="<tr><th scope='row' class='th'>"+produkter[i].produktid+"</th><td class='th'>"+produkter[i].navn+"</td><td class='thB'>"+produkter[i].beskrivelse+"</td><td>"+ "<button onclick='slettProdukt(" + produkter[i].id + ")' class='btnSlett'>Slett</button>"+ "</td></tr>"
@@ -79,3 +80,4 @@ function slettProdukt(id) {
         }
     });
 }
+
