@@ -3,24 +3,24 @@ $(function(){
 });
 
 function hentAlleInbound() {
-  $.get( "/hentStock", function( inboundData ) {
+  $.get( "/hentStock", function( stockData ) {
     $.get( "/hentAlle", function( produkterData ) {
-      formaterData(inboundData, produkterData);
+      formaterData(stockData, produkterData);
     });
   });
 }
 
 
-function formaterData(inboundData, produkterData) {
+function formaterData(stockData, produkterData) {
   var ut = "<table class='table table-light table-hover font center-table'>" +
       "<tr>" +
       "<th scope='col' class=thLabel>ProduktID</th><th scope='col' class=thLabel>Produkt Navn</th><th scope='col' class=thLabel>Beskrivelse</th><th scope='col' class=thLabel>Antall</th>" +
       "</tr>";
 
-  for (let i in inboundData) {
+  for (let i in stockData) {
     for (let j in produkterData) {
-      if (inboundData[i].produktid === produkterData[j].produktid) {
-        ut += "<tr><td class='th'>" + inboundData[i].produktid + "</td><td class='th'>" + produkterData[j].navn + "</td><td class='thB'>" + produkterData[j].beskrivelse + "</td><td class='th'>" + inboundData[i].quantity + "</td> </tr>";
+      if (stockData[i].produktid === produkterData[j].produktid) {
+        ut += "<tr><td class='th'>" + stockData[i].produktid + "</td><td class='th'>" + produkterData[j].navn + "</td><td class='thB'>" + produkterData[j].beskrivelse + "</td><td class='th'>" + stockData[i].quantity + "</td> </tr>";
         break;
       }
     }

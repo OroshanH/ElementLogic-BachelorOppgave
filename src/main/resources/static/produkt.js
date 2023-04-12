@@ -3,7 +3,9 @@ $(function(){
 });
 
 function regProdukt() {
-
+    if (isNaN(parseInt($("#produktid").val())) || $("#navn").val() == "" || $("#beskrivelse").val() == ""){
+        showCustomDialog();
+    } else {
   const produkt = {
     produktid: parseInt($("#produktid").val()),
     navn: $("#navn").val(),
@@ -35,10 +37,10 @@ function regProdukt() {
                body: payload
            })
            .then(response => {
-               console.log('Function called successfully.');
+               console.log('Ok');
            })
            .catch(error => {
-               console.error('Error calling function:', error);
+               console.error('Error:', error);
            });
 
        });
@@ -47,9 +49,16 @@ function regProdukt() {
   $("#produktid").val("");
   $("#navn").val("");
   $("#beskrivelse").val("");
+  }
 };
 
-
+function showCustomDialog() {
+  let dialog = document.getElementById('custom-dialog');
+  dialog.classList.add('show');
+  setTimeout(function() {
+    dialog.classList.remove('show');
+  }, 1500);
+}
 
 function hentAlle() {
     $.get( "/hentAlle", function( data ) {
@@ -62,13 +71,15 @@ function formaterData(produkter){
         "<th scope='col' class='thLabel'>ProduktID</th><th scope='col' class='thLabel'>Produkt Navn</th><th scope='col' class='thLabel'>Beskrivelse</th><th scope='col' class='thLabel'>Slett Produkt</th>" +
         "</tr>";
     for(let i in produkter ){
-        ut+="<tr><th scope='row' class='th'>"+produkter[i].produktid+"</th><td class='th'>"+produkter[i].navn+"</td><td class='thB'>"+produkter[i].beskrivelse+"</td><td>"+ "<button onclick='slettProdukt(" + produkter[i].id + ")' class='btnSlett'>Slett</button>"+ "</td></tr>"
+        ut+="<tr><th scope='row' class='th'>"+produkter[i].produktid+"</th><td class='th'>"+produkter[i].navn+"</td><td class='thB'>"+produkter[i].beskrivelse+"</td><td>"+ "<button onclick='slettProdukt(" + produkter[i].id + ")' class='btnSlett' id='btn'>Slett</button>"+ "</td></tr>"
     }
     $("#produktene").html(ut);
 }
 
 
 function slettProdukt(id) {
+
+
     $.ajax({
         url: "/slettProdukt/" + id,
         type: "DELETE",
@@ -76,7 +87,7 @@ function slettProdukt(id) {
             hentAlle();
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            console.log("Error kunne ikke slette: " + textStatus);
+            console.log("Error: " + textStatus);
         }
     });
 }

@@ -90,3 +90,23 @@ word-break: break-all;
 width: 40%;
 }
 
+#custom-dialog {
+  position: fixed;
+  top: 13%;
+  left: -10%;
+  transform: translateY(-50%);
+  background-color: #B9132F;
+  border: 1px solid #ddd;
+  padding: 10px;
+  transition: left 0.3s ease-in-out;
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+  color: #ffffff;
+  border-color: #B9132F;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  z-index: 1;
+}
+
+#custom-dialog.show {
+  left: 0%;
+}

@@ -1,12 +1,8 @@
-body {
-  background-color: rgba(151, 153, 155, 0.2);
-}
+
 .topnav {
     background-color: white;
     overflow: hidden;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-
-
 }
 .topnav a {
     float: right;
@@ -36,7 +32,6 @@ body {
 
 body {
       background-color: rgba(151, 153, 155, 0.2);
-
 }
 
 .right-side-table {
@@ -44,7 +39,7 @@ body {
     flex-direction: column;
     background-color: white;
     margin: 30px;
-    height: 75%; /* For å justere høyden til tabell div'en */
+    height: 75%;
     width: 75%;
     border-radius: 0;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
@@ -58,6 +53,9 @@ body {
     margin-bottom: 30px;
 }
 
+#centerTabell{
+margin-top: 8%;
+}
 .center-table {
     margin: auto;
     width: 95% !important;
@@ -87,6 +85,8 @@ body {
   border-color: #B9132F;
   font-family: 'Roboto', sans-serif;
    box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+
+
 }
 
 .thB{
@@ -97,4 +97,27 @@ width: 40%;
 .thLabel{
 font-size: 16px;
 color: black;
+}
+
+#custom-dialog,#custom-dialog2 {
+  position: fixed;
+  top: 17%;
+  left: -10%;
+  transform: translateY(-50%);
+  background-color: #B9132F;
+  border: 1px solid #ddd;
+  padding: 10px;
+  transition: left 0.3s ease-in-out;
+   box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+  color: #ffffff;
+  border-color: #B9132F;
+  font-family: 'Roboto', sans-serif;
+  z-index: -1;
+  font-weight: 600;
+}
+#custom-dialog2{
+top: 12%;
+}
+#custom-dialog.show,#custom-dialog2.show {
+  left: 0%;
 }

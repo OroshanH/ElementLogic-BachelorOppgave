@@ -34,17 +34,19 @@ body {
 .table-height {
   height: 500px;
 }
+
 .table-title {
   text-align: center;
   color: black;
   font-family: 'Roboto', sans-serif;
-
 }
+
 .input-title{
     text-align: center;
     font-family: 'Roboto', sans-serif;
     margin-left: 5%;
 }
+
 .font {
   font-family: 'Roboto', sans-serif;
 }
@@ -52,30 +54,32 @@ body {
 .main-content{
   display: flex;
   height: 100%;
-
 }
 
 .left-side-registration-box{
   display: flex;
   flex-direction: column;
-  background-color: #ffffff; /*  #97999b */
+  background-color: #ffffff;
   margin: 30px;
-  height: 70%; /* For å justere høyden til registrerings boksen */
+  height: 70%;
   width: 25%;
   border-radius: 0;
   box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+  z-index: 2;
+  margin-top: 5%;
 }
+
 .right-side-table {
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
   margin: 30px;
-  height: 75%; /* For å justere høyden til tabell div'en */
+  height: 75%;
   width: 75%;
   border-radius: 0;
   color: #B9132F;
   box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
-
+  margin-top: 5%;
 }
 .center-table {
   margin: auto;
@@ -146,4 +150,25 @@ width: 40%;
 .thLabel{
 font-size: 16px;
 color: black;
+}
+
+#custom-dialog {
+  position: fixed;
+  top: 13%;
+  left: -10%;
+  transform: translateY(-50%);
+  background-color: #B9132F;
+  border: 1px solid #ddd;
+  padding: 10px;
+  transition: left 0.3s ease-in-out;
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+  color: #ffffff;
+  border-color: #B9132F;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  z-index: 1;
+}
+
+#custom-dialog.show {
+  left: 0%;
 }

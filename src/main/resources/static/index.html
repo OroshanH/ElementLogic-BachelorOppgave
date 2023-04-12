@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 
+
 <head>
     <meta charset="UTF-8">
     <title>Produkter</title>
@@ -19,7 +20,7 @@
     <a href="stockpage/stock.html">Stock Page</a>
     <a href="inboundpage/inbound.html">Inbound Page</a>
     <a href="index.html" class="active">Product Page</a>
-    <div class="logo"><a href="#"><img src="logo.PNG"></a>
+    <div class="logo"><a href="../index.html"><img src="logo.PNG"></a>
 </div>
 </div>
 
@@ -38,10 +39,13 @@
                 <input type="text" id="beskrivelse"/>
 
             </div>
+
             <button class="button-width" type="submit" name="regProdukt" onclick="regProdukt()">Registrer</button><br/>
 
         </div>
-
+    <div id="custom-dialog">
+        Vennligst fyll alle feltene
+    </div>
         <div class="right-side-table">
             <h3 class="table-title">Alle Produktene</h3>
             <div id="produktene"></div>

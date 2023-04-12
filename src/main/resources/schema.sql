@@ -39,3 +39,12 @@ CREATE TABLE outbound
     status VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 );
+
+CREATE TABLE constant
+(
+    id INTEGER AUTO_INCREMENT NOT NULL,
+    x INTEGER NOT NULL,
+    y INTEGER NOT NULL,
+    z INTEGER NOT NULL,
+    PRIMARY KEY (id)
+);

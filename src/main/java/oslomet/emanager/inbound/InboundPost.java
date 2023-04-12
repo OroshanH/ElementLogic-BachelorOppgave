@@ -36,11 +36,11 @@ public class InboundPost {
         int statusCode = conn.getResponseCode();
 
         if (statusCode >= 200 && statusCode < 300) {
-            String response = "Message sent successfully!";
+            String response = "Antall av produkter sendt til eManager";
             conn.disconnect();
             return ResponseEntity.ok(response);
         } else {
-            String response = "Message delivery failed. Error code: " + statusCode;
+            String response = "Sending av antall produkter feilet. Error kode: " + statusCode;
             conn.disconnect();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }

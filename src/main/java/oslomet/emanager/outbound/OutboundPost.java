@@ -35,11 +35,11 @@ public class OutboundPost {
         int statusCode = conn.getResponseCode();
 
         if (statusCode >= 200 && statusCode < 300) {
-            String response = "Message sent successfully!";
+            String response = "Produkter hentet fra eManager";
             conn.disconnect();
             return ResponseEntity.ok(response);
         } else {
-            String response = "Message delivery failed. Error code: " + statusCode;
+            String response = "Henting av produkter feilet. Error kode: " + statusCode;
             conn.disconnect();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }

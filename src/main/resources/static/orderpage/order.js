@@ -31,6 +31,11 @@ function toggleInputField(i) {
   }
 }
 function lagreOutbound(id, i) {
+ if (isNaN(parseInt($("#quantity" + i).val()))){
+  showCustomDialog();
+  return false;
+  }
+
  $.get("/hentAlle", function(produkter) {
   $.get("/hentConstant", function(constant){
   const existingIndex = valgtOutbound.findIndex(obj => obj.outbound.produktid === produkter[i].produktid);
@@ -45,7 +50,7 @@ function lagreOutbound(id, i) {
           extpicklistid: constant[0].x,
           extorderid: constant[0].x,
           extorderlineid: constant[0].y,
-          status: "Ikke Sendt"
+          status: "Sendt"
         }
         valgtOutbound.push({
           outbound: outbound
@@ -62,8 +67,10 @@ function lagreOutbound(id, i) {
 
  function lagreValgte() {
  if (valgtOutbound.length === 0) {
-     throw new Error("Ingen Produkter Valgt");
+     showCustomDialog2();
    }
+
+
      const url = "/lagreOutbound";
         toggleInputField();
         function toggleInputField() {
@@ -122,10 +129,10 @@ function lagreOutbound(id, i) {
                               body: xmlPayload
                           })
                           .then(response => {
-                              console.log('Function called successfully.');
+                              console.log('Ok');
                           })
                           .catch(error => {
-                              console.error('Error calling function:', error);
+                              console.error('Error:', error);
                           });
      }
  }
@@ -162,3 +169,17 @@ function oppdaterProduktStatus(produktid) {
 
 
 
+function showCustomDialog() {
+  let dialog = document.getElementById('custom-dialog');
+  dialog.classList.add('show');
+  setTimeout(function() {
+    dialog.classList.remove('show');
+  }, 1500);
+}
+function showCustomDialog2() {
+  let dialog = document.getElementById('custom-dialog2');
+  dialog.classList.add('show');
+  setTimeout(function() {
+    dialog.classList.remove('show');
+  }, 1500);
+}

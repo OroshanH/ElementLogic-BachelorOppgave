@@ -23,6 +23,10 @@ function formaterData(produkter){
 
 
 function sendProdukt(id, i) {
+if (isNaN(parseInt($("#quantity" + i).val()))){
+  showCustomDialog();
+  return false;
+  }
     $.get("/hentConstant", function(constant) {
         const inbound = {
             quantity: parseInt($("#quantity" + i).val()),
@@ -73,10 +77,10 @@ function sendProdukt(id, i) {
                     body: payload
                 })
                 .then(response => {
-                    console.log('Function called successfully.');
+                    console.log('Ok');
                 })
                 .catch(error => {
-                    console.error('Error calling function:', error);
+                    console.error('Error:', error);
                 });
             });
         });
@@ -85,5 +89,11 @@ function sendProdukt(id, i) {
 
 
 
-
+function showCustomDialog() {
+  let dialog = document.getElementById('custom-dialog');
+  dialog.classList.add('show');
+  setTimeout(function() {
+    dialog.classList.remove('show');
+  }, 1500);
+}
 
