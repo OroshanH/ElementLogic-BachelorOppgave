@@ -16,8 +16,8 @@ public class InboundRepository {
 
 
     public void lagreInbound(Inbound inbound) {
-        String sql = "INSERT INTO Inbound (quantity, produktid, purchaseorderid, purchaseorderlineid, status) VALUES (?, ?, ?, ?, ?) " +
-                "ON DUPLICATE KEY UPDATE quantity = quantity + VALUES(quantity), purchaseorderid = VALUES(purchaseorderid), purchaseorderlineid = VALUES(purchaseorderlineid), status = VALUES(status)";
+        String sql = "INSERT INTO Inbound (quantity, produktid, purchaseorderid, purchaseorderlineid, status) VALUES (?, ?, ?, ?, ?) ";
+
         db.update(sql, inbound.getQuantity(), inbound.getProduktid(), inbound.getPurchaseorderid(), inbound.getPurchaseorderlineid(), inbound.getStatus());
     }
 

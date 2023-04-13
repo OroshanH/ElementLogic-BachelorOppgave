@@ -23,6 +23,22 @@
     </div>
 </div>
 
+<div id="inputField">
+<div>
+    <label for="product-select">Select a product:</label>
+    <select id="product-select" class="form-select">
+        <option value="" disabled selected value>Choose a product</option>
+    </select>
+</div>
+<div>
+    <label for="quantity-input">Quantity:</label>
+    <input type="number" min="1" id="quantity-input" class="form-control" disabled>
+</div>
+<div>
+    <button id="send-button" class="btn btn-primary" disabled>Send</button>
+</div>
+</div>
+
 <div class="right-side-table center-table-div margin-table-div">
     <h3 class="table-title">Inbound Products</h3>
     <div id="produktene" class="center-table"></div>
@@ -31,6 +47,7 @@
 <div id="custom-dialog">
     Vennligst skriv antall
 </div>
+
 
 
 </body>

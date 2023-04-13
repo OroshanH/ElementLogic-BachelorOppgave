@@ -1,36 +1,61 @@
 $(function(){
-    hentAlle();
+    hentProdukter();
 });
 
-function hentAlle() {
+function hentProdukter() {
     $.get( "/hentAlle", function( data ) {
-        formaterData(data);
+    $.get( "/hentAlleInbound", function( inboundData ) {
+        populateProductSelect(data);
+        formaterData(inboundData);
+    });
     });
 };
 
+function populateProductSelect(produkter) {
 
-function formaterData(produkter){
-    var ut = "<table class='table table-light table-hover font center-table'>" +
-        "<tr>" +
-        "<th scope='col' class=thLabel>ProduktID</th><th scope='col' class=thLabel>Produkt Navn</th><th scope='col' class=thLabel>Beskrivelse</th><th scope='col' class=thLabel>Antall</th><th scope='col' class=thLabel>Send Produkt</th>" +
-        "</tr>";
+    var select = $("#product-select");
     for(let i in produkter ){
-        ut+="<tr><td class='th'>"+produkter[i].produktid+"</td><td class='th'>"+produkter[i].navn+"</td><td class='thB'>"+produkter[i].beskrivelse+"</td><td class='thInp'>" +  "<input type='number' min='1' id='quantity" + i + "'>" + "</td>" + "<td>" + "<button id='myButton' onclick='sendProdukt(" + produkter[i].produktid +  ", " + i + ")' class='btnSend'>Send</button>" + "</td></tr>"
+        select.append(`<option value="${produkter[i].produktid}">${produkter[i].navn}</option>`);
     }
-    $("#produktene").html(ut);
+    select.prop("disabled", false);
 }
 
+$(document).ready(function() {
+  console.log("test");
+  $("#product-select").on("change", function() {
+    console.log("Product selected");
+    var productId = $(this).val();
+    if (productId === "") {
+      $("#quantity-input").prop("disabled", true);
+      $("#send-button").prop("disabled", true);
+    } else {
+      $("#quantity-input").prop("disabled", false);
+      $("#send-button").prop("disabled", false);
+      $("#quantity-input").val("");
+    }
+  });
+
+  $("#send-button").on("click", function() {
+    var productId = $("#product-select").val();
+    var quantity = parseInt($("#quantity-input").val());
+    if (isNaN(quantity) || quantity <= 0) {
+      alert("Please enter a valid quantity.");
+      return;
+    }
+    sendProdukt(productId, quantity);
+  });
+});
 
 
-function sendProdukt(id, i) {
-if (isNaN(parseInt($("#quantity" + i).val()))){
-  showCustomDialog();
-  return false;
-  }
+
+
+
+function sendProdukt(productId, quantity) {
+
     $.get("/hentConstant", function(constant) {
         const inbound = {
-            quantity: parseInt($("#quantity" + i).val()),
-            produktid: id,
+            quantity: quantity,
+            produktid: productId,
             purchaseorderid: constant[0].z,
             purchaseorderlineid: constant[0].z,
             status: "Ikke sendt"
@@ -39,20 +64,14 @@ if (isNaN(parseInt($("#quantity" + i).val()))){
                      $.post("/oppdaterZ", {z: constant[0].z + 1}, function(result){});
                      });
         const stock = {
-            quantity: parseInt($("#quantity" + i).val()),
-            produktid: id
+            quantity: quantity,
+            produktid: productId
         };
 
         const url = "/lagreInbound";
-        const stockUrl = "/lagreStock";
 
         $.post(url, inbound, function(resultat) {
 
-            $("#quantity" + i).val("");
-
-            $.post(stockUrl, stock, function(resultat2) {
-
-            });
 
             $.get("/hentAlleInbound", function(alleInbound) {
                 const latestInbound = alleInbound[alleInbound.length - 1];
@@ -86,6 +105,31 @@ if (isNaN(parseInt($("#quantity" + i).val()))){
         });
     });
 }
+
+
+function formaterData(inboundData) {
+  var ut = "<table class='table table-light table-hover font center-table'>" +
+    "<tr>" +
+    "<th scope='col' class='thLabel'>ProduktID</th><th scope='col' class='thLabel'>Purchaseorderid</th><th scope='col' class='thLabel'>Purchaseorderlineid</th><th scope='col' class='thLabel'>Antall</th><th scope='col' class='thLabel'>Status</th></tr>";
+
+  for (let i in inboundData) {
+      ut += "<tr><td class='th'>" + inboundData[i].produktid + "</td><td class='th'>" + inboundData[i].purchaseorderid + "</td><td class='th'>" + inboundData[i].purchaseorderlineid + "</td>" + "<td class=th>" + inboundData[i].quantity + "</td> <td class='th'>" + inboundData[i].status + "</td></tr>";
+  }
+
+  ut += "</table>";
+  $("#produktene").html(ut);
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

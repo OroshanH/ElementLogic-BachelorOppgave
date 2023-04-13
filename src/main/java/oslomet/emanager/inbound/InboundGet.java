@@ -36,7 +36,7 @@ public class InboundGet {
                 String actualQuantity = missionElement.getElementsByTagName("ActualQuantity").item(0).getTextContent();
                 String extProductId = ((Element) missionElement.getParentNode().getParentNode().getParentNode()).getElementsByTagName("ExtProductId").item(0).getTextContent();
                 int quantity = (int) Double.parseDouble(actualQuantity);
-                String sql = "UPDATE Stock SET quantity = quantity + ? WHERE produktid = ?";
+                String sql = "INSERT INTO Stock (quantity, produktid) VALUES (?, ?)";
                 int rowsAffected = jdbcTemplate.update(sql, quantity, extProductId);
             }
 

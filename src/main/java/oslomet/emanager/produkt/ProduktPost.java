@@ -1,8 +1,10 @@
 package oslomet.emanager.produkt;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,10 +19,11 @@ import java.util.Base64;
 
 @RestController
 public class ProduktPost {
-
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
     @PostMapping("/produktPost")
     public ResponseEntity<String> produktPost(@RequestBody String payload) throws IOException {
-        String url = "https://webhook.site/6667640e-92a2-44d3-91ef-1fddd586c795";
+        String url = "https://webhook.site/4ffe673e-0bf3-4317-bd69-660bdbe4bfd9";
         String username = "APIUSER";
         String password = "1994";
 
@@ -38,15 +41,20 @@ public class ProduktPost {
 
         int statusCode = conn.getResponseCode();
 
+        String response = "";
         if (statusCode >= 200 && statusCode < 300) {
-            String response = "Produkt sendt til eManager";
+             response = "Produkt sendt til eManager";
             conn.disconnect();
             return ResponseEntity.ok(response);
         } else {
-            String response = "Sending av produkt feilet. Error kode: " + statusCode;
+             response = "Sending av produkt feilet. Error kode: " + statusCode;
+            String sql = "DELETE FROM Produkt ORDER BY id DESC LIMIT 1";
+            int rowsAffected = jdbcTemplate.update(sql);
             conn.disconnect();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
+
+
     }
 
 }

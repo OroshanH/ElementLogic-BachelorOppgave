@@ -148,7 +148,7 @@ function formaterData(inboundData, produktData, outboundData, stockData) {
   for (let i in inboundData) {
     let produktIndex = produktData.findIndex(p => p.produktid === inboundData[i].produktid);
     if (produktIndex >= 0) {
-      ut += "<tr><td class='th'>" + inboundData[i].produktid + "</td><td class='th'>" + produktData[produktIndex].navn + "</td><td class='thB'>" + produktData[produktIndex].beskrivelse + "</td><td class='th'>" + "<input type='number' min='1' max='"+ stockData[i].quantity +"' class='inputReset'  id='quantity" + i + "'>" + "</td>" + "<td>" + "<button id='velgButton" + i + "' onclick='lagreOutbound(" + inboundData[i].produktid + ", " + i + ")' class='btnVelg'>Velg</button>" + "</td><td>" + inboundData[i].status + "</td> </tr>";
+      ut += "<tr><td class='th'>" + inboundData[i].produktid + "</td><td class='th'>" + produktData[produktIndex].navn + "</td><td class='thB'>" + produktData[produktIndex].beskrivelse + "</td><td class='th'>" + "<input type='number' min='1' max='"+ "stockData[i].quantity" +"' class='inputReset'  id='quantity" + i + "'>" + "</td>" + "<td>" + "<button id='velgButton" + i + "' onclick='lagreOutbound(" + inboundData[i].produktid + ", " + i + ")' class='btnVelg'>Velg</button>" + "</td><td>" + inboundData[i].status + "</td> </tr>";
     }
   }
 
