@@ -17,7 +17,11 @@ public class InboundRepository {
 
     public void lagreInbound(Inbound inbound) {
         String sql = "INSERT INTO Inbound (quantity, produktid, purchaseorderid, purchaseorderlineid, status) VALUES (?, ?, ?, ?, ?) ";
+        db.update(sql, inbound.getQuantity(), inbound.getProduktid(), inbound.getPurchaseorderid(), inbound.getPurchaseorderlineid(), inbound.getStatus());
+    }
 
+    public void lagreInboundMock(Inbound inbound) {
+        String sql = "INSERT INTO InboundMock (quantity, produktid, purchaseorderid, purchaseorderlineid, status) VALUES (?, ?, ?, ?, ?) ";
         db.update(sql, inbound.getQuantity(), inbound.getProduktid(), inbound.getPurchaseorderid(), inbound.getPurchaseorderlineid(), inbound.getStatus());
     }
 
@@ -26,12 +30,21 @@ public class InboundRepository {
         List<Inbound> alleInbound = db.query(sql,new BeanPropertyRowMapper(Inbound.class));
         return alleInbound;
     }
+
+    public List<Inbound> hentAlleInboundMock(){
+        String sql = "SELECT * FROM InboundMock";
+        List<Inbound> alleInbound = db.query(sql,new BeanPropertyRowMapper(Inbound.class));
+        return alleInbound;
+    }
     public void oppdaterStatus(int produktid) {
         String sql = "UPDATE Inbound SET status = 'Sendt' WHERE produktid = ?";
         db.update(sql, produktid);
     }
 
-
+    public void slettInbound (int id) {
+        String sql = "DELETE FROM InboundMock WHERE id = ?";
+        db.update(sql, id);
+    }
 
 }
 

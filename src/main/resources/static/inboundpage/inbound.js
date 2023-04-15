@@ -4,11 +4,14 @@ $(function(){
 
 function hentProdukter() {
     $.get( "/hentAlle", function( data ) {
-    $.get( "/hentAlleInbound", function( inboundData ) {
+    $.get( "/hentAlleInboundMock", function( inboundData ) {
+    $.get( "/hentAlleInbound", function( inboundDataFerdig ) {
         populateProductSelect(data);
         formaterData(inboundData);
+        formaterDataFerdig(inboundDataFerdig);
     });
     });
+     });
 };
 
 function populateProductSelect(produkter) {
@@ -21,9 +24,7 @@ function populateProductSelect(produkter) {
 }
 
 $(document).ready(function() {
-  console.log("test");
   $("#product-select").on("change", function() {
-    console.log("Product selected");
     var productId = $(this).val();
     if (productId === "") {
       $("#quantity-input").prop("disabled", true);
@@ -39,7 +40,7 @@ $(document).ready(function() {
     var productId = $("#product-select").val();
     var quantity = parseInt($("#quantity-input").val());
     if (isNaN(quantity) || quantity <= 0) {
-      alert("Please enter a valid quantity.");
+      showCustomDialog()
       return;
     }
     sendProdukt(productId, quantity);
@@ -58,22 +59,18 @@ function sendProdukt(productId, quantity) {
             produktid: productId,
             purchaseorderid: constant[0].z,
             purchaseorderlineid: constant[0].z,
-            status: "Ikke sendt"
+            status: "Work in Progress"
         };
         $.get("/hentConstant", function(constant){
                      $.post("/oppdaterZ", {z: constant[0].z + 1}, function(result){});
                      });
-        const stock = {
-            quantity: quantity,
-            produktid: productId
-        };
 
-        const url = "/lagreInbound";
+
+        const url = "/lagreInboundMock";
 
         $.post(url, inbound, function(resultat) {
 
-
-            $.get("/hentAlleInbound", function(alleInbound) {
+            $.get("/hentAlleInboundMock", function(alleInbound) {
                 const latestInbound = alleInbound[alleInbound.length - 1];
                 const payload = `<?xml version="1.0" encoding="UTF-8"?>
                     <ImportOperation>
@@ -97,6 +94,7 @@ function sendProdukt(productId, quantity) {
                 })
                 .then(response => {
                     console.log('Ok');
+                    location.reload();
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -110,28 +108,43 @@ function sendProdukt(productId, quantity) {
 function formaterData(inboundData) {
   var ut = "<table class='table table-light table-hover font center-table'>" +
     "<tr>" +
-    "<th scope='col' class='thLabel'>ProduktID</th><th scope='col' class='thLabel'>Purchaseorderid</th><th scope='col' class='thLabel'>Purchaseorderlineid</th><th scope='col' class='thLabel'>Antall</th><th scope='col' class='thLabel'>Status</th></tr>";
+    "<th scope='col' class='thLabel'>ProduktID</th><th scope='col' class='thLabel'>Purchaseorderid</th><th scope='col' class='thLabel'>Purchaseorderlineid</th><th scope='col' class='thLabel'>Antall</th><th scope='col' class='thLabel'>Status</th><th scope='col' class='thLabel'>Delete</th></tr>";
 
   for (let i in inboundData) {
-      ut += "<tr><td class='th'>" + inboundData[i].produktid + "</td><td class='th'>" + inboundData[i].purchaseorderid + "</td><td class='th'>" + inboundData[i].purchaseorderlineid + "</td>" + "<td class=th>" + inboundData[i].quantity + "</td> <td class='th'>" + inboundData[i].status + "</td></tr>";
+      ut += "<tr><td class='th'>" + inboundData[i].produktid + "</td><td class='th'>" + inboundData[i].purchaseorderid + "</td><td class='th'>" + inboundData[i].purchaseorderlineid + "</td>" + "<td class=th>" + inboundData[i].quantity + "</td> <td class='th'>" + inboundData[i].status + "</td><td>" + "<button onclick='slettInbound(" + inboundData[i].id + ")' class='btnSlett' id='btn'>Delete</button>" + "</td></tr>";
   }
 
   ut += "</table>";
   $("#produktene").html(ut);
 }
 
+function formaterDataFerdig(inboundDataFerdig) {
+  var ut = "<table class='table table-light table-hover font center-table'>" +
+    "<tr>" +
+    "<th scope='col' class='thLabel'>ProduktID</th><th scope='col' class='thLabel'>Purchaseorderid</th><th scope='col' class='thLabel'>Purchaseorderlineid</th><th scope='col' class='thLabel'>Antall</th><th scope='col' class='thLabel'>Status</th></tr>";
+
+  for (let i in inboundDataFerdig) {
+      ut += "<tr><td class='th'>" + inboundDataFerdig[i].produktid + "</td><td class='th'>" + inboundDataFerdig[i].purchaseorderid + "</td><td class='th'>" + inboundDataFerdig[i].purchaseorderlineid + "</td>" + "<td class=th>" + inboundDataFerdig[i].quantity + "</td> <td class='th'>" + inboundDataFerdig[i].status + "</td></tr>";
+  }
+
+  ut += "</table>";
+  $("#produkteneFerdig").html(ut);
+}
 
 
 
-
-
-
-
-
-
-
-
-
+function slettInbound(id) {
+    $.ajax({
+        url: "/slettInbound/" + id,
+        type: "DELETE",
+        success: function() {
+            hentProdukter();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log("Error: " + textStatus);
+        }
+    });
+}
 
 function showCustomDialog() {
   let dialog = document.getElementById('custom-dialog');

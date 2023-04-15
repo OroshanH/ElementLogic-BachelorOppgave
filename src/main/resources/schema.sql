@@ -48,3 +48,14 @@ CREATE TABLE constant
     z INTEGER NOT NULL,
     PRIMARY KEY (id)
 );
+
+CREATE TABLE inboundMock
+(
+    id INTEGER AUTO_INCREMENT NOT NULL,
+    quantity INTEGER NOT NULL,
+    produktid INTEGER NOT NULL,
+    purchaseorderid INTEGER NOT NULL,
+    purchaseorderlineid INTEGER NOT NULL,
+    status VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+);

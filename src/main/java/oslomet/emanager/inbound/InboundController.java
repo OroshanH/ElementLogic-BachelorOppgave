@@ -15,13 +15,22 @@ public class InboundController {
     @PostMapping("/lagreInbound")
     public void lagreInbound(Inbound innInbound){rep.lagreInbound(innInbound);}
 
+    @PostMapping("/lagreInboundMock")
+    public void lagreInboundMock(Inbound innInbound){rep.lagreInboundMock(innInbound);}
     @GetMapping("/hentAlleInbound")
     public List<Inbound> hentAlleInbound(){return rep.hentAlleInbound();}
+
+    @GetMapping("/hentAlleInboundMock")
+    public List<Inbound> hentAlleInboundMock(){return rep.hentAlleInboundMock();}
 
     @PutMapping("/oppdaterStatus/{produktid}")
     public void oppdaterStatus(@PathVariable int produktid) {
         rep.oppdaterStatus(produktid);
     }
 
+    @DeleteMapping("/slettInbound/{id}")
+    public void slettInbound(@PathVariable int id) {
+        rep.slettInbound(id);
+    }
 
 }

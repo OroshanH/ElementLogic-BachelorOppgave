@@ -89,7 +89,7 @@ function lagreOutbound(id, i) {
         $.post(url, valgtOutbounds.outbound, function(resultat) {
 
         const produktid = valgtOutbounds.outbound.produktid;
-        oppdaterProduktStatus(produktid);
+
 
             console.log("Sendt outbound");
             valgtOutbound = [];

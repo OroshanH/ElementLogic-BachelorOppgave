@@ -23,7 +23,7 @@ public class ProduktPost {
     private JdbcTemplate jdbcTemplate;
     @PostMapping("/produktPost")
     public ResponseEntity<String> produktPost(@RequestBody String payload) throws IOException {
-        String url = "https://webhook.site/4ffe673e-0bf3-4317-bd69-660bdbe4bfd9";
+        String url = "http://193.69.50.119/api/products/import";
         String username = "APIUSER";
         String password = "1994";
 
