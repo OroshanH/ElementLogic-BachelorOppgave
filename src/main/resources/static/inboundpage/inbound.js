@@ -108,7 +108,7 @@ function sendProdukt(productId, quantity) {
 function formaterData(inboundData) {
   var ut = "<table class='table table-light table-hover font center-table'>" +
     "<tr>" +
-    "<th scope='col' class='thLabel'>ProduktID</th><th scope='col' class='thLabel'>Purchaseorderid</th><th scope='col' class='thLabel'>Purchaseorderlineid</th><th scope='col' class='thLabel'>Antall</th><th scope='col' class='thLabel'>Status</th><th scope='col' class='thLabel'>Delete</th></tr>";
+    "<th scope='col' class='thLabel'>ProduktID</th><th scope='col' class='thLabel'>Purchaseorderid</th><th scope='col' class='thLabel'>Purchaseorderlineid</th><th scope='col' class='thLabel'>Quantity</th><th scope='col' class='thLabel'>Status</th><th scope='col' class='thLabel'>Delete</th></tr>";
 
   for (let i in inboundData) {
       ut += "<tr><td class='th'>" + inboundData[i].produktid + "</td><td class='th'>" + inboundData[i].purchaseorderid + "</td><td class='th'>" + inboundData[i].purchaseorderlineid + "</td>" + "<td class=th>" + inboundData[i].quantity + "</td> <td class='th'>" + inboundData[i].status + "</td><td>" + "<button onclick='slettInbound(" + inboundData[i].id + ")' class='btnSlett' id='btn'>Delete</button>" + "</td></tr>";
@@ -121,7 +121,7 @@ function formaterData(inboundData) {
 function formaterDataFerdig(inboundDataFerdig) {
   var ut = "<table class='table table-light table-hover font center-table'>" +
     "<tr>" +
-    "<th scope='col' class='thLabel'>ProduktID</th><th scope='col' class='thLabel'>Purchaseorderid</th><th scope='col' class='thLabel'>Purchaseorderlineid</th><th scope='col' class='thLabel'>Antall</th><th scope='col' class='thLabel'>Status</th></tr>";
+    "<th scope='col' class='thLabel'>ProduktID</th><th scope='col' class='thLabel'>Purchaseorderid</th><th scope='col' class='thLabel'>Purchaseorderlineid</th><th scope='col' class='thLabel'>Quantity</th><th scope='col' class='thLabel'>Status</th></tr>";
 
   for (let i in inboundDataFerdig) {
       ut += "<tr><td class='th'>" + inboundDataFerdig[i].produktid + "</td><td class='th'>" + inboundDataFerdig[i].purchaseorderid + "</td><td class='th'>" + inboundDataFerdig[i].purchaseorderlineid + "</td>" + "<td class=th>" + inboundDataFerdig[i].quantity + "</td> <td class='th'>" + inboundDataFerdig[i].status + "</td></tr>";

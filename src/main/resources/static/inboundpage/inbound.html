@@ -23,19 +23,21 @@
     </div>
 </div>
 
+<div class="main-content">
 <div id="inputField">
-<div>
-    <label for="product-select">Select a product:</label>
+    <h3 class="table-title">Select a Product </h3>
+<div id="selectDiv">
+    <label for="product-select">Product</label>
     <select id="product-select" class="form-select">
         <option value="" disabled selected value>Choose a product</option>
     </select>
 </div>
-<div>
-    <label for="quantity-input">Quantity:</label>
+<div id="selectDiv2">
+    <label for="quantity-input">Quantity</label>
     <input type="number" min="1" id="quantity-input" class="form-control" disabled>
 </div>
 <div>
-    <button id="send-button" class="btn btn-primary" disabled>Send</button>
+    <button id="send-button" class="button-width" type="submit" disabled>Send</button>
 </div>
 </div>
 
@@ -45,9 +47,10 @@
     <script src="inbound.js"></script>
 </div>
 
-<div class="right-side-table center-table-div margin-table-div">
+<div class="right-side-table center-table-div margin-table-div" id="placedGoods">
 <h3 class="table-title">Placed Goods</h3>
 <div id="produkteneFerdig" class="center-table"></div>
+</div>
 </div>
 
 <div id="custom-dialog">

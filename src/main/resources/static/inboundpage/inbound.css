@@ -27,15 +27,13 @@
   font-family: 'Roboto', sans-serif;
 }
 
-
-
 .active{
   font-weight: bold;
 }
 
 body {
   background-color: rgba(151, 153, 155, 0.2);
-
+    font-family: 'Roboto', sans-serif;
 }
 
 .right-side-table {
@@ -50,20 +48,17 @@ body {
 }
 .center-table-div {
   margin: auto;
-  width: 90%;
+  width: 70%;
 }
 .margin-table-div {
-  margin-top: 5%;
-
+  margin-top: 2%;
 }
 
 .center-table {
   margin: auto;
   width: 95% !important;
 }
-#produkteneFerdig{
 
-}
 .table-title {
   text-align: center;
   font-family: 'Roboto', sans-serif;
@@ -114,6 +109,60 @@ width: 40%;
 }
 
 #inputField{
-margin-left: 50%;
+margin-left: auto;
+margin-right: auto;
+background-color: white;
+margin-top: 2%;
+box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+width: 20%;
+order: 1;
+}
 
+.btnSlett{
+border-color:#B9132F;
+background-color:#B9132F;
+color: white;
+box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+}
+
+#selectDiv,#selectDiv2{
+margin-left: 25%;
+}
+
+#send-button{
+margin-left: 40%;
+margin-bottom: 5%;
+box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+font-family: 'Roboto', sans-serif;
+ color: #ffffff;
+  background-color: #34495E;
+  border-color: #34495E;
+   width: 30%;
+    height: 30px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.table-title{
+padding-top: 5%;
+}
+#quantity-input,#product-select{
+box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+}
+
+.main-content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+
+
+.right-side-table.center-table-div.margin-table-div {
+  width: 70%;
+  order: 2;
+}
+
+#placedGoods{
+ margin-left: 27%;
 }

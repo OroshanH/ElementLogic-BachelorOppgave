@@ -109,12 +109,12 @@ div.settings label {
   width: 20%;
   height: 40px;
   text-align: center;
-  margin-left: 40%;
+  margin-left: 50%;
   border-radius: 0;
   margin-top: 2%;
   color: #ffffff;
-  background-color: #B9132F;
-  border-color: #B9132F;
+  background-color: #34495E;
+  border-color: #34495E;
   font-family: 'Roboto', sans-serif;
   font-weight: 600;
    box-shadow: 4px 4px 4px rgba(0,0,0,0.2);

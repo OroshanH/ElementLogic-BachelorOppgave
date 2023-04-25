@@ -68,8 +68,8 @@ margin-top: 8%;
 
 .hentBtn{
   color: #ffffff;
-  background-color: #B9132F;
-  border-color: #B9132F;
+  background-color: #34495E;
+  border-color: #34495E;
   font-family: 'Roboto', sans-serif;
    width: 10%;
    height: 35px;
@@ -81,8 +81,8 @@ margin-top: 8%;
 
 .btnVelg{
   color: #ffffff;
-  background-color: #B9132F;
-  border-color: #B9132F;
+  background-color: #34495E;
+    border-color: #34495E;
   font-family: 'Roboto', sans-serif;
    box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
 
@@ -120,4 +120,31 @@ top: 12%;
 }
 #custom-dialog.show,#custom-dialog2.show {
   left: 0%;
+}
+
+.btnSlett{
+border-color:#B9132F;
+background-color:#B9132F;
+color: white;
+box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+}
+
+
+.expanded-table.dark-table {
+  background-color: #F5F5F5;
+}
+
+.expanded-table th,
+.expanded-table td {
+padding-right: 100px;
+}
+
+.arrow {
+  width: 17px;
+  height: 20px;
+  margin-right: 3px;
+}
+
+.arrow-down {
+  transform: rotate(90deg);
 }

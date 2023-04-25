@@ -38,13 +38,25 @@ public class OutboundGet {
             for (int i = 0; i < orderlineNodes.getLength(); i++) {
                 Element orderlineElement = (Element) orderlineNodes.item(i);
                 String pickedQuantity = orderlineElement.getElementsByTagName("PickedQuantity").item(0).getTextContent();
+                String extOrderId = orderlineElement.getElementsByTagName("ExtOrderId").item(0).getTextContent();
                 Element productElement = (Element) orderlineElement.getElementsByTagName("Product").item(0);
                 if (productElement != null) {
                     String productNo = productElement.getElementsByTagName("ProductNo").item(0).getTextContent();
                     int quantity = Integer.parseInt(pickedQuantity);
+                    String outboundStatus = "Finished";
+
                     String sql = "UPDATE Stock SET quantity = quantity - ? WHERE produktid = ?";
                     int rowsAffected = jdbcTemplate.update(sql, quantity, productNo);
-                    System.out.println("Product No: " + productNo);
+
+                    String outBoundsql = "UPDATE OutboundMock SET quantity = quantity - ? WHERE produktid = ?";
+                    int rowsAffectedsql = jdbcTemplate.update(outBoundsql, quantity, productNo);
+
+                    String outboundSql = "UPDATE Outbound SET Status = ? WHERE produktid = ? AND extorderid = ?";
+                    int rowsAffectedOutbound = jdbcTemplate.update(outboundSql, outboundStatus, productNo, extOrderId);
+
+                    String deleteSql = "DELETE FROM OutboundMock WHERE quantity = 0";
+                    int rowsDeleted = jdbcTemplate.update(deleteSql);
+
                 }
             }
 
@@ -53,6 +65,8 @@ public class OutboundGet {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
         }
     }
+
+
 
 
 }

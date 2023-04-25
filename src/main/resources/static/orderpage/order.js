@@ -3,11 +3,12 @@ $(function(){
 });
 
 function hentAlle() {
-  $.get( "/hentAlleInbound", function( inboundData ) {
+  $.get( "/hentAlleOutboundMock", function( outboundDataMock ) {
     $.get( "/hentAlle", function( produkterData ) {
     $.get( "/hentAlleOutbound", function( outboundData ) {
     $.get( "/hentStock", function( stockData ) {
-      formaterData(inboundData, produkterData, outboundData, stockData);
+      formaterData(outboundDataMock, produkterData, outboundData, stockData);
+      formaterDataFerdig(outboundData);
     });
   });
 });
@@ -23,13 +24,18 @@ function toggleInputField(i) {
   if (quantityInput.prop("readonly")) {
     quantityInput.prop("readonly", false);
     quantityInput.css("opacity", "1");
-    velgButton.text("Velg");
+    velgButton.text("Select");
+    velgButton.css("background-color", "");
+    velgButton.css("border-color", "");
   } else {
     quantityInput.prop("readonly", true);
     quantityInput.css("opacity", "0.5");
-    velgButton.text("Valgt");
+    velgButton.text("Selected");
+    velgButton.css("background-color", "green");
+    velgButton.css("border-color", "green");
   }
 }
+
 function lagreOutbound(id, i) {
  if (isNaN(parseInt($("#quantity" + i).val()))){
   showCustomDialog();
@@ -38,7 +44,7 @@ function lagreOutbound(id, i) {
 
  $.get("/hentAlle", function(produkter) {
   $.get("/hentConstant", function(constant){
-  const existingIndex = valgtOutbound.findIndex(obj => obj.outbound.produktid === produkter[i].produktid);
+  const existingIndex = valgtOutbound.findIndex(obj => obj.outbound.produktid === id);
 
   if (existingIndex !== -1) {
     valgtOutbound.splice(existingIndex, 1);
@@ -46,11 +52,11 @@ function lagreOutbound(id, i) {
   } else {
         const outbound = {
           quantity: parseInt($("#quantity" + i).val()),
-          produktid: produkter[i].produktid,
+          produktid: id,
           extpicklistid: constant[0].x,
           extorderid: constant[0].x,
           extorderlineid: constant[0].y,
-          status: "Sendt"
+          status: "Work in Progress"
         }
         valgtOutbound.push({
           outbound: outbound
@@ -79,7 +85,7 @@ function lagreOutbound(id, i) {
 
             quantityInput.prop("readonly", false);
             quantityInput.css("opacity", "1");
-            velgButton.text("Velg");
+            velgButton.text("Select");
             $(".inputReset").val("");
 
         }
@@ -129,26 +135,29 @@ function lagreOutbound(id, i) {
                               body: xmlPayload
                           })
                           .then(response => {
-                              console.log('Ok');
+                              location.reload();
+                              console.log('Success');
                           })
                           .catch(error => {
                               console.error('Error:', error);
                           });
      }
+
  }
 
 
 
-function formaterData(inboundData, produktData, outboundData, stockData) {
+function formaterData(outboundDataMock, produktData,stockData) {
   var ut = "<table class='table table-light table-hover font center-table'>" +
     "<tr>" +
-    "<th scope='col' class='thLabel'>ProduktID</th><th scope='col' class='thLabel'>Produkt Navn</th><th scope='col' class='thLabel'>Beskrivelse</th><th scope='col' class='thLabel'>Antall</th><th scope='col' class='thLabel'>Send</th><th scope='col' class='thLabel'>Status</th>" +
+    "<th scope='col' class='thLabel'>ProduktID</th><th scope='col' class='thLabel'>Produkt Navn</th><th scope='col' class='thLabel'>Beskrivelse</th><th scope='col' class='thLabel'>Quantity</th><th scope='col' class='thLabel'>Antall</th><th scope='col' class='thLabel'>Send</th>" +
     "</tr>";
 
-  for (let i in inboundData) {
-    let produktIndex = produktData.findIndex(p => p.produktid === inboundData[i].produktid);
+  for (let i in outboundDataMock) {
+    let produktIndex = produktData.findIndex(p => p.produktid === outboundDataMock[i].produktid);
     if (produktIndex >= 0) {
-      ut += "<tr><td class='th'>" + inboundData[i].produktid + "</td><td class='th'>" + produktData[produktIndex].navn + "</td><td class='thB'>" + produktData[produktIndex].beskrivelse + "</td><td class='th'>" + "<input type='number' min='1' max='"+ "stockData[i].quantity" +"' class='inputReset'  id='quantity" + i + "'>" + "</td>" + "<td>" + "<button id='velgButton" + i + "' onclick='lagreOutbound(" + inboundData[i].produktid + ", " + i + ")' class='btnVelg'>Velg</button>" + "</td><td>" + inboundData[i].status + "</td> </tr>";
+      ut += "<tr><td class='th'>" + outboundDataMock[i].produktid + "</td><td class='th'>" + produktData[produktIndex].navn + "</td><td class='thB'>" + produktData[produktIndex].beskrivelse + "</td><td class='th'>" + outboundDataMock[i].quantity + "</td><td class='th'>" + "<input type='number' min='1' max='" + outboundDataMock[i].quantity + "' class='inputReset'  id='quantity" + i + "'>" + "</td>" + "<td>" + "<button id='velgButton" + i + "' onclick='lagreOutbound(" + outboundDataMock[i].produktid + ", " + i + ")' class='btnVelg'>Select</button>" + "</td></tr>";
+
     }
   }
 
@@ -156,17 +165,68 @@ function formaterData(inboundData, produktData, outboundData, stockData) {
   $("#produktene").html(ut);
 }
 
+function formaterDataFerdig(outboundData) {
+  var ut = "<table class='table table-light table-hover font center-table'>" +
+    "<tr>" +
+    "<th scope='col' class='thLabel'>ExtPickListID</th><th scope='col' class='thLabel'>Status</th><th scope='col' class='thLabel'>Delete</th>" +
+    "</tr>";
 
-
-function oppdaterProduktStatus(produktid) {
-  const url = "/oppdaterStatus/" + produktid;
-  $.ajax({
-    url: url,
-    type: "PUT",
-    success: function(resultat) {location.reload();}
-  });
+let existingIds = {};
+for (let i in outboundData) {
+  let status = outboundData[i].status;
+  let deleteButton = "";
+  if (status === "Work in Progress") {
+    deleteButton = "<button onclick='slettOutbound(" + outboundData[i].extorderid + ")' class='btnSlett' id='btn'>Delete</button>";
+  }
+  let picklistId = outboundData[i].extpicklistid;
+  let produktId = outboundData[i].produktid;
+  let quantity = outboundData[i].quantity;
+  let extorderId = outboundData[i].extorderid;
+  let extorderlineid = outboundData[i].extorderlineid;
+  if (!existingIds[picklistId]) {
+    ut += "<tr onclick='displayRowData(" + picklistId + ")'><td class='th'><img src='arrowR.png' class='arrow'>" + picklistId + "</td> <td class='th'>" + status + "</td><td>" + deleteButton + "</td></tr>";
+    existingIds[picklistId] = true;
+  }
 }
 
+ut += "</table>";
+$("#produkteneFerdig").html(ut);
+
+}
+function displayRowData(picklistId) {
+  let clickedRow = $("td:contains('" + picklistId + "')").closest("tr");
+
+  let expandedRow = clickedRow.next(".expanded-row");
+  if (expandedRow.length && expandedRow.attr("id") === picklistId + "-expanded-row") {
+    expandedRow.remove();
+    clickedRow.removeClass("expanded");
+    clickedRow.find(".arrow").removeClass("arrow-down");
+  } else {
+    $.ajax({
+      url: "/hentOutboundMedExtOrderlineID/" + picklistId,
+      method: "GET",
+      dataType: "json",
+      success: function(data) {
+        let expandedRow = "<table class='expanded-table'><thead><tr><th>ProductID</th><th>Quantity</th><th>ExtOrderID</th><th>ExtOrderlineID</th></tr></thead><tbody>";
+        for (let i = 0; i < data.length; i++) {
+          let row = data[i];
+          let produktId = row.produktid;
+          let quantity = row.quantity;
+          let extorderId = row.extorderid;
+          let extorderlineid = row.extorderlineid;
+          expandedRow += "<tr><td>" + produktId + "</td><td>" + quantity + "</td><td>" + extorderId + "</td><td>" + extorderlineid + "</td></tr>";
+        }
+        expandedRow += "</tbody></table>";
+        clickedRow.after(expandedRow).next().addClass("expanded-row").addClass("dark-table").attr("id", picklistId + "-expanded-row");
+        clickedRow.addClass("expanded");
+        clickedRow.find(".arrow").addClass("arrow-down");
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log("Error: " + textStatus + " - " + errorThrown);
+      }
+    });
+  }
+}
 
 
 function showCustomDialog() {
@@ -182,4 +242,17 @@ function showCustomDialog2() {
   setTimeout(function() {
     dialog.classList.remove('show');
   }, 1500);
+}
+
+function slettOutbound(extorderid) {
+    $.ajax({
+        url: "/slettOutbound/" + extorderid,
+        type: "DELETE",
+        success: function() {
+            hentAlle();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log("Error: " + textStatus);
+        }
+    });
 }

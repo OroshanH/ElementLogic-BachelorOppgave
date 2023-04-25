@@ -9,7 +9,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Inbound Page</title>
+    <title>Order Page</title>
 </head>
 <body>
 
@@ -23,18 +23,22 @@
 </div>
 
 <div class="right-side-table center-table-div margin-table-div" id="centerTabell">
-    <h3 class="table-title">Order Products</h3>
+    <h3 class="table-title">Pick List</h3>
     <div id="produktene" class="center-table"></div>
     <div id="custom-dialog">
-        Ugyldig antall
+        Invalid quantity
     </div>
     <div id="custom-dialog2">
-        Ingen produkter valgt
+        No products chosen
     </div>
-    <button class="hentBtn" onclick="lagreValgte()">Hent Produkter</button>
-    <script src="order.js"></script>
+    <button class="hentBtn" onclick="lagreValgte()">Retrieve Picklist</button>
 </div>
 
+<div class="right-side-table center-table-div margin-table-div" id="centerTabellFerdig">
+    <h3 class="table-title">Confirmed Pick</h3>
+    <div id="produkteneFerdig" class="center-table"></div>
+</div>
 
+<script src="order.js"></script>
 </body>
 </html>

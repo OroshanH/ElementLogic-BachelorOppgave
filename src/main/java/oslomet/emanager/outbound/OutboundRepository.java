@@ -29,5 +29,19 @@ public class OutboundRepository {
     }
 
 
+    public List<Outbound> hentAlleOutboundMock(){
+        String sql = "SELECT * FROM OutboundMock";
+        List<Outbound> alleOutbound = db.query(sql,new BeanPropertyRowMapper(Outbound.class));
+        return alleOutbound;
+    }
+    public List<Outbound> hentOutboundMedExtOrderlineID(int extpicklistid){
+        String sql = "SELECT * FROM Outbound WHERE extpicklistid = ?";
+        List<Outbound> outboundList = db.query(sql, new Object[]{extpicklistid}, new BeanPropertyRowMapper<>(Outbound.class));
+        return outboundList;
+    }
+    public void slettOutbound (int id) {
+        String sql = "DELETE FROM Outbound WHERE extorderid = ?";
+        db.update(sql, id);
+    }
 
 }

@@ -10,7 +10,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Produkter</title>
+    <title>Product Page</title>
 
 </head>
 <body>
@@ -26,28 +26,28 @@
 
 <div class="main-content">
         <div class="left-side-registration-box">
-            <h3 class="input-title">Registrer Produkt</h3>
+            <h3 class="input-title">Product Registration</h3>
 
             <div class="settings">
                 <label>ProduktID:</label>
                 <input type="number" min="1" id="produktid"/>
 
-                <label>Produkt Navn:</label>
+                <label>Product Name:</label>
                 <input type="text" id="navn"/>
 
-                <label>Beskrivelse:</label>
+                <label>Description:</label>
                 <input type="text" id="beskrivelse"/>
 
             </div>
 
-            <button class="button-width" type="submit" name="regProdukt" onclick="regProdukt()">Registrer</button><br/>
+            <button class="button-width" type="submit" name="regProdukt" onclick="regProdukt()">Register</button><br/>
 
         </div>
     <div id="custom-dialog">
-        Vennligst fyll alle feltene
+        Please fill all fields
     </div>
         <div class="right-side-table">
-            <h3 class="table-title">Alle Produktene</h3>
+            <h3 class="table-title">Registered Products</h3>
             <div id="produktene"></div>
             <script src="produkt.js"></script>
         </div>

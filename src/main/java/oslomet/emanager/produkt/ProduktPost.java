@@ -23,7 +23,7 @@ public class ProduktPost {
     private JdbcTemplate jdbcTemplate;
     @PostMapping("/produktPost")
     public ResponseEntity<String> produktPost(@RequestBody String payload) throws IOException {
-        String url = "http://193.69.50.119/api/products/import";
+        String url = "https://webhook.site/7a2bfb20-36d9-4deb-9f64-29c40409df7e";
         String username = "APIUSER";
         String password = "1994";
 
@@ -48,8 +48,6 @@ public class ProduktPost {
             return ResponseEntity.ok(response);
         } else {
              response = "Sending av produkt feilet. Error kode: " + statusCode;
-            String sql = "DELETE FROM Produkt ORDER BY id DESC LIMIT 1";
-            int rowsAffected = jdbcTemplate.update(sql);
             conn.disconnect();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
