@@ -17,7 +17,7 @@ public class InboundPost {
 
     @PostMapping("/inboundPost")
     public ResponseEntity<String> produktPost(@RequestBody String payload) throws IOException {
-        String url = "https://webhook.site/7a2bfb20-36d9-4deb-9f64-29c40409df7e";
+        String url = "http://193.69.50.119/api/goodsreceivals/import";
         String username = "APIUSER";
         String password = "1994";
 
