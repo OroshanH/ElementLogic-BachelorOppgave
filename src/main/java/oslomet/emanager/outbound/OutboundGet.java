@@ -48,6 +48,9 @@ public class OutboundGet {
                     String sql = "UPDATE Stock SET quantity = quantity - ? WHERE produktid = ?";
                     int rowsAffected = jdbcTemplate.update(sql, quantity, productNo);
 
+                    String quantityOut = "UPDATE Stock SET quantityOut = quantityOut - ? WHERE produktid = ?";
+                    int rowsAffectedQ = jdbcTemplate.update(quantityOut, quantity, productNo);
+
                     String outBoundsql = "UPDATE OutboundMock SET quantity = quantity - ? WHERE produktid = ?";
                     int rowsAffectedsql = jdbcTemplate.update(outBoundsql, quantity, productNo);
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import oslomet.emanager.inbound.Inbound;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class OutboundRepository {
@@ -39,9 +40,18 @@ public class OutboundRepository {
         List<Outbound> outboundList = db.query(sql, new Object[]{extpicklistid}, new BeanPropertyRowMapper<>(Outbound.class));
         return outboundList;
     }
-    public void slettOutbound (int id) {
-        String sql = "DELETE FROM Outbound WHERE extorderid = ?";
-        db.update(sql, id);
+    public Map<String, Object> slettOutbound(int id) {
+        String sql = "SELECT quantity, produktid FROM Outbound WHERE extorderid = ?";
+        Map<String, Object> result = db.queryForMap(sql, id);
+        db.update("DELETE FROM Outbound WHERE extorderid = ?", id);
+        return result;
     }
+
+
+    public void slettAlle () {
+        String sql = "DELETE FROM Outbound";
+        db.update(sql);
+    }
+
 
 }

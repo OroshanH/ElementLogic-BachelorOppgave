@@ -22,14 +22,24 @@ public class StockRepository {
         db.update(sql, stock.getQuantity(), stock.getProduktid());
     }
 
-
-
     public List<Produkt> hentStock() {
         String sql = "SELECT * FROM Stock";
         List<Produkt> alleStock = db.query(sql,new BeanPropertyRowMapper(Stock.class));
         return alleStock;
     }
 
+    public void lagreQuantityOut(Stock stock) {
+        String sql = "UPDATE Stock SET quantityOut = quantityOut + ? WHERE produktid = ?";
+        db.update(sql, stock.getQuantityOut(), stock.getProduktid());
+    }
 
+    public void updateQuantityOut(int quantity, int produktid) {
+        String sql = "UPDATE Stock SET quantityOut = quantityOut - ? WHERE produktid = ?";
+        db.update(sql, quantity, produktid);
+    }
 
+    public void slettStock (int id) {
+        String sql = "DELETE FROM Stock WHERE id = ?";
+        db.update(sql, id);
+    }
 }

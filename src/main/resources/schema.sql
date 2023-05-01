@@ -23,6 +23,7 @@ CREATE TABLE stock
 (
     id INTEGER AUTO_INCREMENT NOT NULL,
     quantity INTEGER NOT NULL,
+    quantityOut INTEGER NOT NULL,
     produktid INTEGER NOT NULL,
     PRIMARY KEY (id)
 );

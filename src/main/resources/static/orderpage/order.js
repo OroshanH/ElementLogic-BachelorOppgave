@@ -101,6 +101,7 @@ function lagreOutbound(id, i) {
             valgtOutbound = [];
 
         });
+
      });
 
     outboundPost();
@@ -135,35 +136,69 @@ function lagreOutbound(id, i) {
                               body: xmlPayload
                           })
                           .then(response => {
-                              location.reload();
+                              hentAlle();
                               console.log('Success');
                           })
                           .catch(error => {
                               console.error('Error:', error);
                           });
      }
+         valgtOutbound.forEach(function(valgtOutbounds) {
+           const produktid = valgtOutbounds.outbound.produktid;
+           const quantityOut = valgtOutbounds.outbound.quantity;
+
+
+           $.ajax({
+             url: "/lagreQuantityOut",
+             type: "POST",
+             data: { produktid: produktid, quantityOut: quantityOut },
+             success: function(result) {
+               console.log("Quantity saved to database for product " + produktid);
+             },
+             error: function(jqXHR, textStatus, errorThrown) {
+               console.error("Error saving quantity to database for product " + produktid);
+               console.error(errorThrown);
+             }
+           });
+         });
+
+
 
  }
 
 
 
-function formaterData(outboundDataMock, produktData,stockData) {
+function formaterData(outboundDataMock, produktData, outboundData, stockData) {
   var ut = "<table class='table table-light table-hover font center-table'>" +
     "<tr>" +
-    "<th scope='col' class='thLabel'>ProduktID</th><th scope='col' class='thLabel'>Produkt Navn</th><th scope='col' class='thLabel'>Beskrivelse</th><th scope='col' class='thLabel'>Quantity</th><th scope='col' class='thLabel'>Antall</th><th scope='col' class='thLabel'>Send</th>" +
+    "<th scope='col' class='thLabel'>ProductID</th><th scope='col' class='thLabel'>Product Name</th><th scope='col' class='thLabel'>Description</th><th scope='col' class='thLabel'>In Stock</th><th scope='col' class='thLabel'>Quantity</th><th scope='col' class='thLabel'>Send</th>" +
     "</tr>";
 
   for (let i in outboundDataMock) {
     let produktIndex = produktData.findIndex(p => p.produktid === outboundDataMock[i].produktid);
-    if (produktIndex >= 0) {
-      ut += "<tr><td class='th'>" + outboundDataMock[i].produktid + "</td><td class='th'>" + produktData[produktIndex].navn + "</td><td class='thB'>" + produktData[produktIndex].beskrivelse + "</td><td class='th'>" + outboundDataMock[i].quantity + "</td><td class='th'>" + "<input type='number' min='1' max='" + outboundDataMock[i].quantity + "' class='inputReset'  id='quantity" + i + "'>" + "</td>" + "<td>" + "<button id='velgButton" + i + "' onclick='lagreOutbound(" + outboundDataMock[i].produktid + ", " + i + ")' class='btnVelg'>Select</button>" + "</td></tr>";
+    let stockIndex = stockData.findIndex(s => s.produktid === outboundDataMock[i].produktid);
+    var mockQuantity = stockData[stockIndex].quantity - stockData[stockIndex].quantityOut;
+    if (produktIndex >= 0 && stockIndex >= 0) {
+      ut += "<tr><td class='th'>" + outboundDataMock[i].produktid + "</td><td class='th'>" + produktData[produktIndex].navn + "</td><td class='thB'>" + produktData[produktIndex].beskrivelse + "</td><td class='th'>" + mockQuantity + "</td><td class='th'>";
 
+
+      if (mockQuantity === 0) {
+        ut += "<input type='number' min='1' max='" + stockData[stockIndex].quantity + "' class='inputReset' id='quantity" + i + "' disabled>";
+      } else {
+        ut += "<input type='number' min='1' max='" + stockData[stockIndex].quantity + "' class='inputReset'  id='quantity" + i + "'>";
+      }
+
+      ut += "</td><td>" + "<button id='velgButton" + i + "' onclick='lagreOutbound(" + outboundDataMock[i].produktid + ", " + i + ")' class='btnVelg'>Select</button>" + "</td></tr>";
     }
   }
 
   ut += "</table>";
   $("#produktene").html(ut);
 }
+
+
+
+
 
 function formaterDataFerdig(outboundData) {
   var ut = "<table class='table table-light table-hover font center-table'>" +
@@ -190,6 +225,9 @@ for (let i in outboundData) {
 }
 
 ut += "</table>";
+ if(outboundData.length !== 0){
+      ut += "<div class='text-center mt-4'><button class='btn btn-danger' id='delete-btn' onclick='slettAlle()'>Delete History</button></div>";
+  }
 $("#produkteneFerdig").html(ut);
 
 }
@@ -248,11 +286,45 @@ function slettOutbound(extorderid) {
     $.ajax({
         url: "/slettOutbound/" + extorderid,
         type: "DELETE",
-        success: function() {
+        success: function(data) {
+            var quantity = data.quantity;
+             var produktid = data.produktid;
+            updateQuantityOut(quantity,produktid);
             hentAlle();
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log("Error: " + textStatus);
         }
     });
+}
+
+function updateQuantityOut(quantity,produktid){
+    $.ajax({
+        url: "/updateQuantityOut",
+        type: "POST",
+        data: { quantity: quantity, produktid: produktid },
+        success: function() {
+            console.log("QuantityOut updated successfully");
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log("Error: " + textStatus);
+        }
+    });
+}
+
+function slettAlle() {
+  if (confirm("Are you sure you want to delete history?")) {
+    fetch('/slettAlleOutbound', {
+      method: 'DELETE'
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log('Ok');
+        hentAlle();
+      } else {
+        console.error('Error');
+      }
+    })
+    .catch(error => console.error(error));
+  }
 }

@@ -33,4 +33,11 @@ public class InboundController {
         rep.slettInbound(id);
     }
 
+    @DeleteMapping("/slettAlleInbound")
+    public void slettAlleInbound() {
+        rep.slettAlle();
+    }
+
+
+
 }

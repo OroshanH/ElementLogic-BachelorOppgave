@@ -140,11 +140,28 @@ padding-right: 100px;
 }
 
 .arrow {
-  width: 17px;
-  height: 20px;
+  width: 10px;
+  height: 14px;
   margin-right: 3px;
 }
 
 .arrow-down {
   transform: rotate(90deg);
+}
+
+.reload-container {
+    position: fixed;
+    top: 95px;
+    left: 0px;
+    width: 60px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reload-image {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
 }

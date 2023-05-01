@@ -45,6 +45,10 @@ public class InboundRepository {
         String sql = "DELETE FROM InboundMock WHERE id = ?";
         db.update(sql, id);
     }
+    public void slettAlle () {
+        String sql = "DELETE FROM Inbound";
+        db.update(sql);
+    }
 
 }
 

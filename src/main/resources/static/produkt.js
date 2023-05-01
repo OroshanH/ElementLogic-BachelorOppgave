@@ -69,7 +69,7 @@ function hentAlle() {
 function formaterData(produkter){
     var ut = "<table class='table table-light table-hover font center-table'>" +
         "<tr>" +
-        "<th scope='col' class='thLabel'>ProduktID</th><th scope='col' class='thLabel'>Product Name</th><th scope='col' class='thLabel'>Description</th><th scope='col' class='thLabel'>Delete Product</th>" +
+        "<th scope='col' class='thLabel'>ProductID</th><th scope='col' class='thLabel'>Product Name</th><th scope='col' class='thLabel'>Description</th><th scope='col' class='thLabel'>Delete Product</th>" +
         "</tr>";
     for(let i in produkter ){
         ut+="<tr><th scope='row' class='th'>"+produkter[i].produktid+"</th><td class='th'>"+produkter[i].navn+"</td><td class='thB'>"+produkter[i].beskrivelse+"</td><td>"+ "<button onclick='slettProdukt(" + produkter[i].id + ")' class='btnSlett' id='btn'>Delete</button>"+ "</td></tr>"

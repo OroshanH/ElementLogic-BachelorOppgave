@@ -38,8 +38,9 @@ public class InboundGet {
                 String extProductId = ((Element) missionElement.getParentNode().getParentNode().getParentNode()).getElementsByTagName("ExtProductId").item(0).getTextContent();
                 String purchaseOrderId = ((Element) missionElement.getParentNode().getParentNode().getParentNode().getParentNode().getParentNode()).getElementsByTagName("PurchaseOrderId").item(0).getTextContent();
                 int quantity = (int) Double.parseDouble(actualQuantity);
-                String sql = "INSERT INTO Stock (quantity, produktid) VALUES (?, ?) ON DUPLICATE KEY UPDATE quantity = quantity + VALUES(quantity)";
-                int rowsAffected = jdbcTemplate.update(sql, quantity, extProductId);
+                int quantityOut = 0;
+                String sql = "INSERT INTO Stock (quantity,quantityOut, produktid) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE quantity = quantity + VALUES(quantity)";
+                int rowsAffected = jdbcTemplate.update(sql, quantity,quantityOut, extProductId);
                 String outboundMockStatus = "Work in Progress";
                 String sql2 = "SELECT purchaseorderid, purchaseorderlineid, status FROM InboundMock WHERE purchaseorderid = ?";
                 Map<String, Object> inboundMock = jdbcTemplate.queryForMap(sql2, purchaseOrderId);

@@ -7,8 +7,8 @@ function hentProdukter() {
     $.get( "/hentAlleInboundMock", function( inboundData ) {
     $.get( "/hentAlleInbound", function( inboundDataFerdig ) {
         populateProductSelect(data);
-        formaterData(inboundData);
-        formaterDataFerdig(inboundDataFerdig);
+        formaterData(inboundData,data);
+        formaterDataFerdig(inboundDataFerdig,data);
     });
     });
      });
@@ -44,6 +44,8 @@ $(document).ready(function() {
       return;
     }
     sendProdukt(productId, quantity);
+    $("#product-select").val("");
+    $("#quantity-input").val("");
   });
 });
 
@@ -105,32 +107,61 @@ function sendProdukt(productId, quantity) {
 }
 
 
-function formaterData(inboundData) {
+function formaterData(inboundData,data) {
   var ut = "<table class='table table-light table-hover font center-table'>" +
     "<tr>" +
-    "<th scope='col' class='thLabel'>ProduktID</th><th scope='col' class='thLabel'>Purchaseorderid</th><th scope='col' class='thLabel'>Purchaseorderlineid</th><th scope='col' class='thLabel'>Quantity</th><th scope='col' class='thLabel'>Status</th><th scope='col' class='thLabel'>Delete</th></tr>";
+    "<th scope='col' class='thLabel'>Product Name</th><th scope='col' class='thLabel'>ProductID</th><th scope='col' class='thLabel'>Purchaseorderid</th><th scope='col' class='thLabel'>Purchaseorderlineid</th><th scope='col' class='thLabel'>Quantity</th><th scope='col' class='thLabel'>Status</th><th scope='col' class='thLabel'>Delete</th></tr>";
 
-  for (let i in inboundData) {
-      ut += "<tr><td class='th'>" + inboundData[i].produktid + "</td><td class='th'>" + inboundData[i].purchaseorderid + "</td><td class='th'>" + inboundData[i].purchaseorderlineid + "</td>" + "<td class=th>" + inboundData[i].quantity + "</td> <td class='th'>" + inboundData[i].status + "</td><td>" + "<button onclick='slettInbound(" + inboundData[i].id + ")' class='btnSlett' id='btn'>Delete</button>" + "</td></tr>";
-  }
+ var productNames = {};
+ for (let i = 0; i < data.length; i++) {
+   productNames[data[i].produktid] = data[i].navn;
+ }
+
+ for (let i in inboundData) {
+   ut += "<tr><td class='th'>" + productNames[inboundData[i].produktid] + "</td><td class='th'>" + inboundData[i].produktid + "</td><td class='th'>" + inboundData[i].purchaseorderid + "</td><td class='th'>" + inboundData[i].purchaseorderlineid + "</td>" + "<td class=th>" + inboundData[i].quantity + "</td> <td class='th'>" + inboundData[i].status + "</td><td>" + "<button onclick='slettInbound(" + inboundData[i].id + ")' class='btnSlett' id='btn'>Delete</button>" + "</td></tr>";
+ }
+
 
   ut += "</table>";
   $("#produktene").html(ut);
 }
 
-function formaterDataFerdig(inboundDataFerdig) {
+function formaterDataFerdig(inboundDataFerdig,data) {
   var ut = "<table class='table table-light table-hover font center-table'>" +
     "<tr>" +
-    "<th scope='col' class='thLabel'>ProduktID</th><th scope='col' class='thLabel'>Purchaseorderid</th><th scope='col' class='thLabel'>Purchaseorderlineid</th><th scope='col' class='thLabel'>Quantity</th><th scope='col' class='thLabel'>Status</th></tr>";
-
+    "<th scope='col' class='thLabel'>Product Name</th><th scope='col' class='thLabel'>ProductID</th><th scope='col' class='thLabel'>Purchaseorderid</th><th scope='col' class='thLabel'>Purchaseorderlineid</th><th scope='col' class='thLabel'>Quantity</th><th scope='col' class='thLabel'>Status</th></tr>";
+ var productNames = {};
+ for (let i = 0; i < data.length; i++) {
+   productNames[data[i].produktid] = data[i].navn;
+ }
   for (let i in inboundDataFerdig) {
-      ut += "<tr><td class='th'>" + inboundDataFerdig[i].produktid + "</td><td class='th'>" + inboundDataFerdig[i].purchaseorderid + "</td><td class='th'>" + inboundDataFerdig[i].purchaseorderlineid + "</td>" + "<td class=th>" + inboundDataFerdig[i].quantity + "</td> <td class='th'>" + inboundDataFerdig[i].status + "</td></tr>";
+      ut += "<tr><td class='th'>" + productNames[inboundDataFerdig[i].produktid] + "</td><td class='th'>" + inboundDataFerdig[i].produktid + "</td><td class='th'>" + inboundDataFerdig[i].purchaseorderid + "</td><td class='th'>" + inboundDataFerdig[i].purchaseorderlineid + "</td>" + "<td class=th>" + inboundDataFerdig[i].quantity + "</td> <td class='th'>" + inboundDataFerdig[i].status + "</td></tr>";
   }
 
   ut += "</table>";
+  if(inboundDataFerdig.length !== 0){
+      ut += "<div class='text-center mt-4'><button class='btn btn-danger' id='delete-btn' onclick='slettAlle()'>Delete History</button></div>";
+  }
+
   $("#produkteneFerdig").html(ut);
 }
 
+function slettAlle() {
+  if (confirm("Are you sure you want to delete history?")) {
+    fetch('/slettAlleInbound', {
+      method: 'DELETE'
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log('Ok');
+        hentProdukter();
+      } else {
+        console.error('Error');
+      }
+    })
+    .catch(error => console.error(error));
+  }
+}
 
 
 function slettInbound(id) {
