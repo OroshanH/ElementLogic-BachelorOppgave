@@ -15,6 +15,10 @@ function regProdukt() {
 
 
     $.get("/hentAlle", function(alleProdukter) {
+        const latestProdukt = alleProdukter.length > 0
+            ? alleProdukter[alleProdukter.length - 1]
+            : { id: 1 };
+
         for (let i = 0; i < alleProdukter.length; i++) {
             if (produktid === alleProdukter[i].produktid) {
                 showCustomDialog("Product ID already registered");
@@ -33,7 +37,6 @@ function regProdukt() {
         $.post(url, produkt, function(resultat) {
             hentAlle();
 
-            const latestProdukt = alleProdukter[alleProdukter.length - 1];
             const payload = `<ImportOperation>
                 <Lines>
                     <ProductLine>
@@ -66,6 +69,7 @@ function regProdukt() {
         $("#beskrivelse").val("");
     });
 }
+
 
 
 function showCustomDialog(message) {
