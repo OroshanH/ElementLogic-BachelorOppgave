@@ -2,10 +2,7 @@ package oslomet.emanager.outbound;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -47,25 +44,19 @@ public class OutboundPost {
         }
     }
 
-    @PostMapping("/slettList")
+    @DeleteMapping("/slettList")
     public ResponseEntity<String> slettList(@RequestParam String extpicklistid) throws IOException {
-        String url = "https://webhook.site/aad9c7c3-3879-4656-9c97-d6e275a15947";
+        String url = "http://193.69.50.119/api/picklists/" + extpicklistid;
         String username = "apiuser";
         String password = "1994";
 
         String encodedAuth = Base64.getEncoder().encodeToString((username + ":" + password).getBytes(StandardCharsets.UTF_8));
-
-        String requestBody = extpicklistid;
 
         URL urlObj = new URL(url);
         HttpURLConnection conn = (HttpURLConnection) urlObj.openConnection();
 
         conn.setRequestMethod("DELETE");
         conn.setRequestProperty("Authorization", "Basic " + encodedAuth);
-        conn.setRequestProperty("Content-Type", "application/json");
-
-        conn.setDoOutput(true);
-        conn.getOutputStream().write(requestBody.getBytes(StandardCharsets.UTF_8));
 
         int statusCode = conn.getResponseCode();
 
@@ -79,5 +70,6 @@ public class OutboundPost {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
+
 
 }
