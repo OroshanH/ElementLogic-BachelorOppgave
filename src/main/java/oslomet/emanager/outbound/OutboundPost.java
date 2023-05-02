@@ -55,7 +55,7 @@ public class OutboundPost {
 
         String encodedAuth = Base64.getEncoder().encodeToString((username + ":" + password).getBytes(StandardCharsets.UTF_8));
 
-        String requestBody = "{\"extpicklistid\":\"" + extpicklistid + "\"}";
+        String requestBody = extpicklistid;
 
         URL urlObj = new URL(url);
         HttpURLConnection conn = (HttpURLConnection) urlObj.openConnection();
