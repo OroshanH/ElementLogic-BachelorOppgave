@@ -92,7 +92,7 @@ body {
 div.settings {
   display:grid;
   margin-top: 2%;
-  margin-left: 2%;
+  margin-left: 7%;
   grid-template-columns: max-content max-content;
   grid-gap:5px;
 }
@@ -109,7 +109,7 @@ div.settings label {
   width: 20%;
   height: 40px;
   text-align: center;
-  margin-left: 50%;
+  margin-left: 40%;
   border-radius: 0;
   margin-top: 2%;
   color: #ffffff;
