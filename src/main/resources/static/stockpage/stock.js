@@ -32,7 +32,7 @@ function formaterData(stockData, produkterData) {
 }
 
 
-function slettStock(id,quantityOut) {
+function slettStock(produktid,quantityOut) {
 
 if (quantityOut > 0) {
     showCustomDialog("Cant delete product which has been ordered");
@@ -40,7 +40,7 @@ if (quantityOut > 0) {
   }
 
     $.ajax({
-        url: "/slettStock/" + id,
+        url: "/slettStock/" + produktid,
         type: "DELETE",
         success: function() {
             hentAlleInbound();
