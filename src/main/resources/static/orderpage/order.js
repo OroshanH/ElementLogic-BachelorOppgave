@@ -38,7 +38,7 @@ function toggleInputField(i) {
 
 function lagreOutbound(id, i) {
  if (isNaN(parseInt($("#quantity" + i).val()))){
-  showCustomDialog();
+  showCustomDialog("Invalid Quantity");
   return false;
   }
 
@@ -73,7 +73,7 @@ function lagreOutbound(id, i) {
 
  function lagreValgte() {
  if (valgtOutbound.length === 0) {
-     showCustomDialog2();
+     showCustomDialog("No products chosen");
    }
 
 
@@ -203,7 +203,7 @@ function formaterData(outboundDataMock, produktData, outboundData, stockData) {
 function formaterDataFerdig(outboundData) {
   var ut = "<table class='table table-light table-hover font center-table'>" +
     "<tr>" +
-    "<th scope='col' class='thLabel'>ExtPickListID</th><th scope='col' class='thLabel'>Status</th><th scope='col' class='thLabel'>Delete</th>" +
+    "<th scope='col' class='thLabel'>ExtPickListID</th><th scope='col' class='thLabel thStatus'>Status</th><th scope='col' class='thLabel'>Delete</th>" +
     "</tr>";
 
 let existingIds = {};
@@ -219,14 +219,14 @@ for (let i in outboundData) {
   let extorderId = outboundData[i].extorderid;
   let extorderlineid = outboundData[i].extorderlineid;
   if (!existingIds[picklistId]) {
-    ut += "<tr onclick='displayRowData(" + picklistId + ")'><td class='th'><img src='arrowR.png' class='arrow'>" + picklistId + "</td> <td class='th'>" + status + "</td><td>" + deleteButton + "</td></tr>";
+    ut += "<tr onclick='displayRowData(" + picklistId + ")'><td class='th'><img src='arrowR.png' class='arrow'>" + picklistId + "</td> <td class='th' id=statusTh>" + status + "</td><td>" + deleteButton + "</td></tr>";
     existingIds[picklistId] = true;
   }
 }
 
 ut += "</table>";
  if(outboundData.length !== 0){
-      ut += "<div class='text-center mt-4'><button class='btn btn-danger' id='delete-btn' onclick='slettAlle()'>Delete History</button></div>";
+      ut += "<div class='text-center mt-4'><button id='deleteHistory' onclick='slettAlle()'>Delete History</button></div>";
   }
 $("#produkteneFerdig").html(ut);
 
@@ -267,20 +267,15 @@ function displayRowData(picklistId) {
 }
 
 
-function showCustomDialog() {
+function showCustomDialog(message) {
   let dialog = document.getElementById('custom-dialog');
+  dialog.innerText = message;
   dialog.classList.add('show');
   setTimeout(function() {
     dialog.classList.remove('show');
   }, 1500);
 }
-function showCustomDialog2() {
-  let dialog = document.getElementById('custom-dialog2');
-  dialog.classList.add('show');
-  setTimeout(function() {
-    dialog.classList.remove('show');
-  }, 1500);
-}
+
 
 function slettOutbound(extorderid) {
     $.ajax({

@@ -3,58 +3,74 @@ $(function(){
 });
 
 function regProdukt() {
-    if (isNaN(parseInt($("#produktid").val())) || $("#navn").val() == "" || $("#beskrivelse").val() == ""){
-        showCustomDialog();
-    } else {
-  const produkt = {
-    produktid: parseInt($("#produktid").val()),
-    navn: $("#navn").val(),
-    beskrivelse: $("#beskrivelse").val(),
-  };
+    const produktid = parseInt($("#produktid").val());
+    const navn = $("#navn").val();
+    const beskrivelse = $("#beskrivelse").val();
 
-  const url = "/lagre";
-  $.post(url, produkt, function(resultat) {
-    hentAlle();
 
-       $.get("/hentAlle", function(alleProdukter) {
-           const latestProdukt = alleProdukter[alleProdukter.length - 1];
-           const payload = `<ImportOperation>
-               <Lines>
-                   <ProductLine>
-                       <TransactionId>${latestProdukt.id}</TransactionId>
-                       <ExtProductId>${produkt.produktid}</ExtProductId>
-                       <ProductName>${produkt.navn}</ProductName>
-                       <ProductDesc>${produkt.beskrivelse}</ProductDesc>
-                   </ProductLine>
-               </Lines>
-           </ImportOperation>`;
+    if (isNaN(produktid) || navn === "" || beskrivelse === "") {
+        showCustomDialog("Please fill all inputfields");
+        return;
+    }
 
-           fetch('/produktPost', {
-               method: 'POST',
-               headers: {
-                   'Content-Type': 'application/xml'
-               },
-               body: payload
-           })
-           .then(response => {
-               console.log('Ok');
-           })
-           .catch(error => {
-               console.error('Error:', error);
 
-           });
+    $.get("/hentAlle", function(alleProdukter) {
+        for (let i = 0; i < alleProdukter.length; i++) {
+            if (produktid === alleProdukter[i].produktid) {
+                showCustomDialog("Product ID already registered");
+                return;
+            }
+        }
 
-       });
-       });
 
-  $("#produktid").val("");
-  $("#navn").val("");
-  $("#beskrivelse").val("");
-  }
-};
+        const produkt = {
+            produktid: produktid,
+            navn: navn,
+            beskrivelse: beskrivelse,
+        };
 
-function showCustomDialog() {
+        const url = "/lagre";
+        $.post(url, produkt, function(resultat) {
+            hentAlle();
+
+            const latestProdukt = alleProdukter[alleProdukter.length - 1];
+            const payload = `<ImportOperation>
+                <Lines>
+                    <ProductLine>
+                        <TransactionId>${latestProdukt.id}</TransactionId>
+                        <ExtProductId>${produkt.produktid}</ExtProductId>
+                        <ProductName>${produkt.navn}</ProductName>
+                        <ProductDesc>${produkt.beskrivelse}</ProductDesc>
+                    </ProductLine>
+                </Lines>
+            </ImportOperation>`;
+
+            fetch('/produktPost', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/xml'
+                },
+                body: payload
+            })
+            .then(response => {
+                console.log('Ok');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+
+
+        $("#produktid").val("");
+        $("#navn").val("");
+        $("#beskrivelse").val("");
+    });
+}
+
+
+function showCustomDialog(message) {
   let dialog = document.getElementById('custom-dialog');
+  dialog.innerText = message;
   dialog.classList.add('show');
   setTimeout(function() {
     dialog.classList.remove('show');

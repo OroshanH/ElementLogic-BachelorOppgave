@@ -155,7 +155,7 @@ color: black;
 #custom-dialog {
   position: fixed;
   top: 13%;
-  left: -10%;
+  left: -25%;
   transform: translateY(-50%);
   background-color: #B9132F;
   border: 1px solid #ddd;

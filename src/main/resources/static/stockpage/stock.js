@@ -21,7 +21,7 @@ function formaterData(stockData, produkterData) {
   var mockQuantity = stockData[i].quantity - stockData[i].quantityOut;
     for (let j in produkterData) {
       if (stockData[i].produktid === produkterData[j].produktid) {
-        ut += "<tr><td class='th'>" + stockData[i].produktid + "</td><td class='th'>" + produkterData[j].navn + "</td><td class='thB'>" + produkterData[j].beskrivelse + "</td><td class='th'>" + mockQuantity + "</td><td>" + "<button onclick='slettStock(" + stockData[i].id + ", " + stockData[i].quantityOut + ")' class='btnSlett' id='btn'>Delete</button>" +  "</td> </tr>";
+        ut += "<tr><td class='th'>" + stockData[i].produktid + "</td><td class='th'>" + produkterData[j].navn + "</td><td class='thB'>" + produkterData[j].beskrivelse + "</td><td class='th'>" + mockQuantity + "</td><td>" + "<button onclick='slettStock(" + stockData[i].id + ", " + stockData[i].quantityOut + ")' class='btnSlett' id='deleteHistory'>Delete</button>" +  "</td> </tr>";
         break;
       }
     }
@@ -35,7 +35,7 @@ function formaterData(stockData, produkterData) {
 function slettStock(id,quantityOut) {
 
 if (quantityOut > 0) {
-    alert("Cant delete stock of ordered product");
+    showCustomDialog("Cant delete product which has been ordered");
     return;
   }
 
@@ -49,4 +49,13 @@ if (quantityOut > 0) {
             console.log("Error: " + textStatus);
         }
     });
+}
+
+function showCustomDialog(message) {
+  let dialog = document.getElementById('custom-dialog');
+  dialog.innerText = message;
+  dialog.classList.add('show');
+  setTimeout(function() {
+    dialog.classList.remove('show');
+  }, 1800);
 }

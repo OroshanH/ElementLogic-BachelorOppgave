@@ -140,7 +140,7 @@ function formaterDataFerdig(inboundDataFerdig,data) {
 
   ut += "</table>";
   if(inboundDataFerdig.length !== 0){
-      ut += "<div class='text-center mt-4'><button class='btn btn-danger' id='delete-btn' onclick='slettAlle()'>Delete History</button></div>";
+      ut += "<div class='text-center mt-4'><button id='deleteHistory' onclick='slettAlle()'>Delete History</button></div>";
   }
 
   $("#produkteneFerdig").html(ut);

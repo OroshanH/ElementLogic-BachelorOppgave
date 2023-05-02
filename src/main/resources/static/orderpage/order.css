@@ -99,10 +99,10 @@ font-size: 16px;
 color: black;
 }
 
-#custom-dialog,#custom-dialog2 {
+#custom-dialog {
   position: fixed;
-  top: 17%;
-  left: -10%;
+  top: 20%;
+  left: -20%;
   transform: translateY(-50%);
   background-color: #B9132F;
   border: 1px solid #ddd;
@@ -115,10 +115,8 @@ color: black;
   z-index: -1;
   font-weight: 600;
 }
-#custom-dialog2{
-top: 12%;
-}
-#custom-dialog.show,#custom-dialog2.show {
+
+#custom-dialog.show {
   left: 0%;
 }
 
@@ -164,4 +162,16 @@ padding-right: 100px;
     width: 40px;
     height: 40px;
     cursor: pointer;
+}
+
+#deleteHistory{
+border-color:#B9132F;
+background-color:#B9132F;
+color: white;
+box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+margin-bottom: 8px;
+}
+
+.thStatus {
+  width: 25%;
 }

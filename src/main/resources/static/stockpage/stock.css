@@ -49,7 +49,7 @@ body {
     width: 90%;
 }
 .margin-table-div {
-    margin-top: 30px;
+    margin-top: 150px;
     margin-bottom: 30px;
 }
 
@@ -74,17 +74,27 @@ word-break: break-all;
 width: 40%;
 }
 
+
+
+#deleteHistory{
+border-color:#B9132F;
+background-color:#B9132F;
+color: white;
+box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+margin-bottom: 8px;
+}
+
 #custom-dialog {
   position: fixed;
-  top: 35%;
-  left: 9%;
+  top: 15%;
+  left: -30%;
   transform: translateY(-50%);
   background-color: #B9132F;
   border: 1px solid #ddd;
   padding: 10px;
-  transition: top 0.3s ease-in-out;
+  transition: left 0.3s ease-in-out;
   box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
-  color: white;
+  color: #ffffff;
   border-color: #B9132F;
   font-family: 'Roboto', sans-serif;
   font-weight: 600;
@@ -92,5 +102,5 @@ width: 40%;
 }
 
 #custom-dialog.show {
-  top: 45%;
+  left: 0%;
 }
