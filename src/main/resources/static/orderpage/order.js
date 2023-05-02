@@ -287,24 +287,24 @@ function slettOutbound(extorderid, extpicklistid) {
             updateQuantityOut(quantity, produktid);
             hentAlle();
 
-            $.ajax({
-                url: "/slettList",
-                type: "DELETE",
-                data: JSON.stringify({extpicklistid: extpicklistid}),
-                contentType: "application/json",
-                success: function(data) {
-                    console.log(data);
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log("Error: " + textStatus);
-                }
-            });
+          $.ajax({
+              url: "/slettList",
+              type: "DELETE",
+              data: extpicklistid,
+              success: function(data) {
+                  console.log(data);
+              },
+              error: function(jqXHR, textStatus, errorThrown) {
+                  console.log("Error: " + textStatus);
+              }
+          });
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log("Error: " + textStatus);
         }
     });
 }
+
 
 
 

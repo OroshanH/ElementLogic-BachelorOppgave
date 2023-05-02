@@ -45,7 +45,7 @@ public class OutboundPost {
     }
 
     @DeleteMapping("/slettList")
-    public ResponseEntity<String> slettList(@RequestParam String extpicklistid) throws IOException {
+    public ResponseEntity<String> slettList(@RequestBody String extpicklistid) throws IOException {
         String url = "http://193.69.50.119/api/picklists/" + extpicklistid;
         String username = "apiuser";
         String password = "1994";
@@ -61,15 +61,16 @@ public class OutboundPost {
         int statusCode = conn.getResponseCode();
 
         if (statusCode >= 200 && statusCode < 300) {
-            String response = "Second call succeeded";
+            String response = "Call succeeded";
             conn.disconnect();
             return ResponseEntity.ok(response);
         } else {
-            String response = "Second call failed. Error code: " + statusCode;
+            String response = "Call failed. Error code: " + statusCode;
             conn.disconnect();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
+
 
 
 }
