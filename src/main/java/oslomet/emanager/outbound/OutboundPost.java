@@ -49,7 +49,7 @@ public class OutboundPost {
 
     @PostMapping("/slettList")
     public ResponseEntity<String> slettList(@RequestParam String extpicklistid) throws IOException {
-        String url = "http://193.69.50.119/api/picklists/";
+        String url = "https://webhook.site/aad9c7c3-3879-4656-9c97-d6e275a15947";
         String username = "apiuser";
         String password = "1994";
 
