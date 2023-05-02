@@ -290,7 +290,7 @@ function slettOutbound(extorderid, extpicklistid) {
             $.ajax({
                 url: "/slettList",
                 type: "POST",
-                data: { extpicklistid: extpicklistid },
+                data: requestBody,
                 success: function(data) {
                     console.log(data);
                 },
