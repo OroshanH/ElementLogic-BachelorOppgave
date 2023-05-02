@@ -89,7 +89,7 @@ width: 40%;
 
 #custom-dialog {
   position: fixed;
-  top: 50%;
+  top: 60%;
   left: -10%;
   transform: translateY(-50%);
   background-color: #B9132F;
@@ -126,11 +126,11 @@ box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
 }
 
 #selectDiv,#selectDiv2{
-margin-left: 25%;
+margin-left: 15%;
 }
 
 #send-button{
-margin-left: 40%;
+margin-left: 35%;
 margin-bottom: 5%;
 box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
 font-family: 'Roboto', sans-serif;
@@ -164,7 +164,7 @@ box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
 }
 
 #placedGoods{
- margin-left: 527px;
+ margin-left: 27.5%;
 }
 
 .reload-container {

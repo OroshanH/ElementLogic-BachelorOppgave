@@ -101,7 +101,7 @@ color: black;
 
 #custom-dialog {
   position: fixed;
-  top: 20%;
+  top: 22%;
   left: -20%;
   transform: translateY(-50%);
   background-color: #B9132F;
