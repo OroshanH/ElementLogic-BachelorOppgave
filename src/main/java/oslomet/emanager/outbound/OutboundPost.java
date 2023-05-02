@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -46,5 +47,37 @@ public class OutboundPost {
         }
     }
 
+    @PostMapping("/slettList")
+    public ResponseEntity<String> slettList(@RequestParam String extpicklistid) throws IOException {
+        String url = "http://193.69.50.119/api/picklists/";
+        String username = "apiuser";
+        String password = "1994";
+
+        String encodedAuth = Base64.getEncoder().encodeToString((username + ":" + password).getBytes(StandardCharsets.UTF_8));
+
+        String requestBody = "{\"extpicklistid\":\"" + extpicklistid + "\"}";
+
+        URL urlObj = new URL(url);
+        HttpURLConnection conn = (HttpURLConnection) urlObj.openConnection();
+
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Authorization", "Basic " + encodedAuth);
+        conn.setRequestProperty("Content-Type", "application/json");
+
+        conn.setDoOutput(true);
+        conn.getOutputStream().write(requestBody.getBytes(StandardCharsets.UTF_8));
+
+        int statusCode = conn.getResponseCode();
+
+        if (statusCode >= 200 && statusCode < 300) {
+            String response = "Second call succeeded";
+            conn.disconnect();
+            return ResponseEntity.ok(response);
+        } else {
+            String response = "Second call failed. Error code: " + statusCode;
+            conn.disconnect();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
 
 }

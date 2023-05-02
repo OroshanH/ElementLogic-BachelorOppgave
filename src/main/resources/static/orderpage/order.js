@@ -288,11 +288,11 @@ function slettOutbound(extorderid, extpicklistid) {
             hentAlle();
 
             $.ajax({
-                url: "http://193.69.50.119/api/picklists/" + extpicklistid,
-                type: "GET",
+                url: "/slettList",
+                type: "POST",
+                data: { extpicklistid: extpicklistid },
                 success: function(data) {
-
-                    console.log("Ok picklist");
+                    console.log(data);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log("Error: " + textStatus);
@@ -304,6 +304,7 @@ function slettOutbound(extorderid, extpicklistid) {
         }
     });
 }
+
 
 
 function updateQuantityOut(quantity,produktid){
