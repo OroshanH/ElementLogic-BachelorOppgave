@@ -286,18 +286,6 @@ function slettOutbound(extorderid, extpicklistid) {
             var produktid = data.produktid;
             updateQuantityOut(quantity, produktid);
             hentAlle();
-
-          $.ajax({
-              url: "/slettList",
-              type: "DELETE",
-              data: extpicklistid,
-              success: function(data) {
-                  console.log(data);
-              },
-              error: function(jqXHR, textStatus, errorThrown) {
-                  console.log("Error: " + textStatus);
-              }
-          });
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log("Error: " + textStatus);

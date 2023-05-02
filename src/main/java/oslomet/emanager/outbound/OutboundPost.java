@@ -44,33 +44,5 @@ public class OutboundPost {
         }
     }
 
-    @DeleteMapping("/slettList")
-    public ResponseEntity<String> slettList(@RequestBody String extpicklistid) throws IOException {
-        String url = "http://193.69.50.119/api/picklists/" + extpicklistid;
-        String username = "apiuser";
-        String password = "1994";
-
-        String encodedAuth = Base64.getEncoder().encodeToString((username + ":" + password).getBytes(StandardCharsets.UTF_8));
-
-        URL urlObj = new URL(url);
-        HttpURLConnection conn = (HttpURLConnection) urlObj.openConnection();
-
-        conn.setRequestMethod("DELETE");
-        conn.setRequestProperty("Authorization", "Basic " + encodedAuth);
-
-        int statusCode = conn.getResponseCode();
-
-        if (statusCode >= 200 && statusCode < 300) {
-            String response = "Call succeeded";
-            conn.disconnect();
-            return ResponseEntity.ok(response);
-        } else {
-            String response = "Call failed. Error code: " + statusCode;
-            conn.disconnect();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-        }
-    }
-
-
 
 }
