@@ -60,7 +60,7 @@ public class OutboundPost {
         URL urlObj = new URL(url);
         HttpURLConnection conn = (HttpURLConnection) urlObj.openConnection();
 
-        conn.setRequestMethod("POST");
+        conn.setRequestMethod("DELETE");
         conn.setRequestProperty("Authorization", "Basic " + encodedAuth);
         conn.setRequestProperty("Content-Type", "application/json");
 
