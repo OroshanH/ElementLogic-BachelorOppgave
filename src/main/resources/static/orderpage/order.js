@@ -211,7 +211,7 @@ for (let i in outboundData) {
   let status = outboundData[i].status;
   let deleteButton = "";
   if (status === "Work in Progress") {
-    deleteButton = "<button onclick='slettOutbound(" + outboundData[i].extorderid + ")' class='btnSlett' id='btn'>Delete</button>";
+    deleteButton = "<button onclick='slettOutbound(" + outboundData[i].extorderid + "," + outboundData[i].extpicklistid + ")' class='btnSlett' id='btn'>Delete</button>";
   }
   let picklistId = outboundData[i].extpicklistid;
   let produktId = outboundData[i].produktid;
@@ -277,21 +277,34 @@ function showCustomDialog(message) {
 }
 
 
-function slettOutbound(extorderid) {
+function slettOutbound(extorderid, extpicklistid) {
     $.ajax({
         url: "/slettOutbound/" + extorderid,
         type: "DELETE",
         success: function(data) {
             var quantity = data.quantity;
-             var produktid = data.produktid;
-            updateQuantityOut(quantity,produktid);
+            var produktid = data.produktid;
+            updateQuantityOut(quantity, produktid);
             hentAlle();
+
+            $.ajax({
+                url: "http://193.69.50.119/api/picklists/" + extpicklistid,
+                type: "GET",
+                success: function(data) {
+
+                    console.log("Ok picklist");
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("Error: " + textStatus);
+                }
+            });
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log("Error: " + textStatus);
         }
     });
 }
+
 
 function updateQuantityOut(quantity,produktid){
     $.ajax({

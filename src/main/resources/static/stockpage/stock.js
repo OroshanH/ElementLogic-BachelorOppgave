@@ -21,7 +21,7 @@ function formaterData(stockData, produkterData) {
   var mockQuantity = stockData[i].quantity - stockData[i].quantityOut;
     for (let j in produkterData) {
       if (stockData[i].produktid === produkterData[j].produktid) {
-        ut += "<tr><td class='th'>" + stockData[i].produktid + "</td><td class='th'>" + produkterData[j].navn + "</td><td class='thB'>" + produkterData[j].beskrivelse + "</td><td class='th'>" + mockQuantity + "</td><td>" + "<button onclick='slettStock(" + stockData[i].id + ", " + stockData[i].quantityOut + ")' class='btnSlett' id='deleteHistory'>Delete</button>" +  "</td> </tr>";
+        ut += "<tr><td class='th'>" + stockData[i].produktid + "</td><td class='th'>" + produkterData[j].navn + "</td><td class='thB'>" + produkterData[j].beskrivelse + "</td><td class='th'>" + mockQuantity + "</td><td>" + "<button onclick='slettStock(" + stockData[i].produktid + ", " + stockData[i].quantityOut + ")' class='btnSlett' id='deleteHistory'>Delete</button>" +  "</td> </tr>";
         break;
       }
     }

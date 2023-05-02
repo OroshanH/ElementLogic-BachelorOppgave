@@ -38,8 +38,11 @@ public class StockRepository {
         db.update(sql, quantity, produktid);
     }
 
-    public void slettStock (int id) {
-        String sql = "DELETE FROM Stock WHERE id = ?";
-        db.update(sql, id);
+    public void slettStock(int id) {
+        String stockSql = "DELETE FROM Stock WHERE id = ?";
+        String outboundSql = "DELETE FROM outboundmock WHERE id = ?";
+        db.update(stockSql, id);
+        db.update(outboundSql, id);
     }
+
 }
