@@ -24,7 +24,7 @@ public class ProduktPost {
     @PostMapping("/produktPost")
     public ResponseEntity<String> produktPost(@RequestBody String payload) throws IOException {
         /*http://193.69.50.119/api/products/import*/
-        String url ="http://193.69.50.119/api/products/import";
+        String url ="http://192.168.2.219/api/products/import";
         String username = "APIUSER";
         String password = "1994";
 

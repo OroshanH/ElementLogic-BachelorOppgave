@@ -15,7 +15,7 @@ public class OutboundPost {
     @PostMapping("/outboundPost")
     public ResponseEntity<String> produktPost(@RequestBody String payload) throws IOException {
         /*http://193.69.50.119/api/picklists/import*/
-        String url = "http://193.69.50.119/api/picklists/import";
+        String url = "http://192.168.2.219/api/picklists/import";
         String username = "APIUSER";
         String password = "1994";
 
