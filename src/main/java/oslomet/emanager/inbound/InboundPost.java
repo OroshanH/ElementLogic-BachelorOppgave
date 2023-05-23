@@ -17,8 +17,8 @@ public class InboundPost {
 
     @PostMapping("/inboundPost")
     public ResponseEntity<String> produktPost(@RequestBody String payload) throws IOException {
-
-        String url = "http://193.69.50.119/api/goodsreceivals/import";
+        /*http://193.69.50.119/api/goodsreceivals/import*/
+        String url = "http://192.168.2.219/api/goodsreceivals/import";
         String username = "APIUSER";
         String password = "1994";
 
