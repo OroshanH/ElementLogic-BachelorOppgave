@@ -1,8 +1,8 @@
 $(function(){
-    hentAlleInbound();
+    hentAlleStock();
 });
 
-function hentAlleInbound() {
+function hentAlleStock() {
   $.get( "/hentStock", function( stockData ) {
     $.get( "/hentAlle", function( produkterData ) {
       formaterData(stockData, produkterData);
@@ -43,7 +43,7 @@ if (quantityOut > 0) {
         url: "/slettStock/" + produktid,
         type: "DELETE",
         success: function() {
-            hentAlleInbound();
+            hentAlleStock();
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log("Error: " + textStatus);
